@@ -10,6 +10,6 @@ class ViewBuilder
     public static function build():Array<Field>
     {
         var processor:ViewProcessor = new ViewProcessor();
-        return processor.process(Context.getBuildFields());
+        return processor.process();
     }
 }

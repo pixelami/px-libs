@@ -5,24 +5,11 @@ import haxe.macro.Context;
 
 class BindingBuilder
 {
-    public function new()
-    {
-    }
+    // TODO enable switching of BindingProcessor implementation with -D compiler flags
 
     public static function build():Array<Field>
     {
-        //trace("Building model " + Context.getLocalClass());
-
         var processor:BindingProcessor = new BindingProcessor();
-        processor.pos = Context.currentPos();
-        processor.currentClass = Context.getLocalClass();
-        processor.fields = Context.getBuildFields();
-
-        processor.processFields();
-        processor.processBindables();
-        processor.createTypeIdentifierField();
-        processor.processErrors();
-
-        return processor.fields;
+        return processor.process();
     }
 }

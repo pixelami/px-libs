@@ -1,8 +1,6 @@
 package org.pixelami.binding;
 
 import org.pixelami.binding.MacroUtil;
-import org.pixelami.binding.MacroUtil;
-import org.pixelami.binding.MacroUtil;
 import org.pixelami.binding.BindingType;
 import haxe.macro.Type;
 import haxe.macro.Expr;
@@ -10,21 +8,21 @@ import haxe.macro.Context;
 
 class ViewProcessor
 {
-    public var bindables:Array<Field>;
-    public var listeners:Array<Field>;
 
     var localClass:haxe.macro.Ref<ClassType>;
     var bindingInfos:Array<BindingInfo>;
     var fieldHash:Hash<Field>;
     var pos:Position;
+    var fields:Array<Field>;
 
     public function new()
     {
     }
 
 
-    public function process(fields:Array<Field>):Array<Field>
+    public function process():Array<Field>
     {
+        fields = Context.getBuildFields();
         pos = Context.currentPos();
         localClass = Context.getLocalClass();
         bindingInfos = [];
@@ -235,11 +233,6 @@ class ViewProcessor
                                 pos:bindingInfo.pos
                             });
                         }
-                    }
-                    else
-                    {
-                        //fields = getAllClassFieldsForType(Context.getLocalClass().get());
-                        //trace();
                     }
 
 

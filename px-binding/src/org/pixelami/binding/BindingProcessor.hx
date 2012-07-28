@@ -12,9 +12,9 @@ typedef Error = {
 class BindingProcessor
 {
     public var bindables:Array<Field>;
-    public var fields:Array<Field>;
-    public var currentClass:haxe.macro.Ref<ClassType>;
-    public var pos:Position;
+    var fields:Array<Field>;
+    var currentClass:haxe.macro.Ref<ClassType>;
+    var pos:Position;
 
     var errorStack:Array<Error>;
     var constructor:Field;
@@ -22,6 +22,20 @@ class BindingProcessor
     public function new()
     {
         errorStack = [];
+    }
+
+    public function process():Array<Field>
+    {
+        pos = Context.currentPos();
+        currentClass = Context.getLocalClass();
+        fields = Context.getBuildFields();
+
+        processFields();
+        processBindables();
+        createTypeIdentifierField();
+        processErrors();
+
+        return fields;
     }
 
     public function processFields()
