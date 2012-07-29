@@ -76,7 +76,7 @@ class ViewProcessor
 
             // get the type and modify it to
             var hostType:Type = MacroUtil.resolveFieldType(f);
-            //var hostClassType:ClassType = null;
+
 
             processHostField(f, localHostSources.get(hostField), fields);
 
@@ -89,8 +89,7 @@ class ViewProcessor
                     {
                         MacroUtil.processErrors(errors, pos);
                     }
-                    //trace("hostType is :"+t);
-                    //hostClassType = t.get();
+
                 default:
                     Context.error("Expected host object to be TInst",pos);
             }
@@ -104,7 +103,6 @@ class ViewProcessor
     {
         switch(field.kind)
         {
-            // currently only supporting FVar until flash issue is fixed in IWire library
             case FVar(t,exp):
 
                 var setterName = "set_"+field.name;
@@ -137,6 +135,9 @@ class ViewProcessor
                 field.kind = newProp;
 
                 fields.push(setterField);
+
+            case FProp(get,set,t,exp):
+                // TODO adjust setter
 
 
             default:
@@ -173,7 +174,7 @@ class ViewProcessor
         var sourcePropertyName = info.hostPath[info.hostPath.length - 1];
 
         var source:String = BindingManager.CREATE_BINDING + "(this,\""+targetPath+"\",value,\""+sourcePropertyName+"\");";
-        trace(source);
+        //trace(source);
         return source;
     }
 
@@ -244,12 +245,13 @@ class ViewProcessor
             // of the view object itself.
             if(bindingInfo.property == null) return errors;
 
-            var hasProperty = bindingInfoPropertyHash.get(bindingInfo.property);
+            var hasProperty = bindingInfoPropertyHash.get(bindingInfo.field.name + "." + bindingInfo.property);
             if(hasProperty)
             {
+
                 errors.push({
-                msg: "Ambiguous binding detected for '"+ bindingInfo.property + "'. It seems to be bound more than once",
-                pos:bindingInfo.pos
+                    msg: "Ambiguous binding detected for '"+ bindingInfo.property + "'. It seems to be bound more than once",
+                    pos:bindingInfo.pos
                 });
             }
             bindingInfoPropertyHash.set(bindingInfo.property, true);
