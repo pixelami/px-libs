@@ -1,3 +1,5 @@
-.iml
+*.iml
 build/
 .DS_Store
+.idea
+Main.build
