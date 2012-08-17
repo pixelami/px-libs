@@ -38,27 +38,26 @@ class LoginView extends Component , implements IBindingView
         container = new VBox(this, 10 , 10);
         container.spacing = 20;
 
-        userInput = new InputText(container, 0,0,"InputText Android",userInput_changeHandler);
-        userInput.name = "usernameInput";
+        userInput = new InputText(container, 0,0);
+        userInput.addEventListener(Event.CHANGE, userInput_changeHandler);
         userInput.addDownAsset = nme.Assets.getBitmapData("assets/android_ui/input_down.png");
         userInput.addUpAsset = nme.Assets.getBitmapData("assets/android_ui/input_up.png");
 
-        passInput = new InputText(container, 0,0,"InputText Android",passInput_changeHandler);
-        passInput.name = "usernameInput";
+        passInput = new InputText(container, 0,0);
+        passInput.addEventListener(Event.CHANGE, passInput_changeHandler);
         passInput.addDownAsset = nme.Assets.getBitmapData("assets/android_ui/input_down.png");
         passInput.addUpAsset = nme.Assets.getBitmapData("assets/android_ui/input_up.png");
 
 
         var hbox:HBox = new HBox(container);
 
-        checkbox = new CheckBox(hbox,0,0,"Auto login",checkBox_changeHandler);
-        checkbox.name = "rememberChkBx";
+        checkbox = new CheckBox(hbox,0,0);
+        checkbox.addEventListener(Event.CHANGE, checkBox_changeHandler);
         checkbox.addUpAsset = nme.Assets.getBitmapData("assets/android_ui/checkbox_uncheck.png");
         checkbox.addDownAsset = nme.Assets.getBitmapData("assets/android_ui/checkbox_check.png");
 
         submitBtn = new PushButton(hbox, 0,0);
         submitBtn.addEventListener(MouseEvent.MOUSE_UP, submitBtn_mouseUpHandler);
-        submitBtn.name = "submitBtn";
         submitBtn.addUpAsset = nme.Assets.getBitmapData("assets/android_ui/button_up.png");
         submitBtn.addDownAsset = nme.Assets.getBitmapData("assets/android_ui/button_down.png");
     }
@@ -80,7 +79,7 @@ class LoginView extends Component , implements IBindingView
 
     function checkBox_changeHandler(event:Event) :Void
     {
-        model.toggleRemember();
+        if(model != null) model.toggleRemember();
     }
 
 

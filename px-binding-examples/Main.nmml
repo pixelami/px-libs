@@ -13,8 +13,8 @@
 
 
     <classpath name="src" />
-    <classpath name="/Users/a/dev/workspaces/pihx/haxe-NME-UI/Source" />
-    <classpath name="/Users/a/dev/workspaces/pihx/px-libs/px-binding/src" />
+    <classpath name="../../haxe-NME-UI/Source" />
+    <classpath name="../px-binding/src" />
     <haxelib name="nme" />
 
     <icon path="/Users/a/dev/workspaces/pihx/haxe-NME-UI/Assets/nme.svg" />

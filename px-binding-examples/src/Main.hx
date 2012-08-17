@@ -1,8 +1,5 @@
-package;
-
 import example.LoginPresentationModel;
 import example.LoginView;
-
 import nme.Lib;
 import nme.events.Event;
 import nme.display.Sprite;
@@ -22,13 +19,16 @@ class Main extends Sprite
 
     private function init(e):Void
     {
-        // Entry point
-
         // Stage:
         // stage.stageWidth x stage.stageHeight @ nme.system.Capabilities.screenDPI
 
         // Assets:
         // nme.Assets.getBitmapData("assets/assetname.jpg");
+        #if iphone
+		Lib.current.stage.removeEventListener(Event.RESIZE, init);
+		#else
+		removeEventListener(Event.ADDED_TO_STAGE, init);
+        #end
 
 
         var view:LoginView = new LoginView(this,0,0);

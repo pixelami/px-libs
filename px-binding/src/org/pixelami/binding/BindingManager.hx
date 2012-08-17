@@ -151,15 +151,15 @@ class BindingManagerDefaultImpl
             var pathComponents:Array<String> = binding.listeningObjectPropertyPath;
 
 
-            trace("pathComponents: "+pathComponents);
+            //trace("pathComponents: "+pathComponents);
             target = binding.listeningObject;
             for(component in pathComponents)
             {
                 target = Reflect.getProperty(target, component);
-                trace("resolving target: "+target);
+                //trace("resolving target: "+target);
                 if(target == null)
                 {
-                    trace("WARNING: unable to resolve target for "+pathComponents);
+                    //trace("WARNING: unable to resolve target for "+pathComponents);
                     return;
                 }
             }

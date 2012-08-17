@@ -30,6 +30,7 @@ class ViewProcessor
 
         for(field in fields)
         {
+            trace(field);
             fieldHash.set(field.name, field);
 
             var bindInfos:Array<BindingInfo> = processFieldBindMeta(field);
