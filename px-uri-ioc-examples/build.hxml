@@ -1,0 +1,11 @@
+-swf-version 10
+-swf build/Main.swf
+-debug
+#
+-cp src
+-cp ../px-uri-ioc/src
+-cp ../px-commons/src
+--macro org.pixelami.uri.macro.ContextBuilder.build()
+-main Main
+-D fdb
+
