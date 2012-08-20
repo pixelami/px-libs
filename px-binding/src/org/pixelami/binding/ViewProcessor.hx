@@ -111,7 +111,7 @@ class ViewProcessor
                 var newPos:Position = MacroUtil.createPositionAfter(field.pos, 1);
 
 
-                var src:String = createContructorBlockSource(sources);
+                var src:String = createConstructorBlockSource(sources);
                 //trace(src);
                 var setterExpr = Context.parse(src, newPos);
 
@@ -146,7 +146,7 @@ class ViewProcessor
         }
     }
 
-    function createContructorBlockSource(lines:Array<String>):String
+    function createConstructorBlockSource(lines:Array<String>):String
     {
         var src:String = "{";
         for(line in lines)
@@ -174,7 +174,7 @@ class ViewProcessor
         if(info.property != null) targetPath  += "." + info.property;
         var sourcePropertyName = info.hostPath[info.hostPath.length - 1];
 
-        var source:String = BindingManager.CREATE_BINDING + "(this,\""+targetPath+"\",value,\""+sourcePropertyName+"\");";
+        var source:String = BindingManager.CREATE_BINDING + "(this,\""+targetPath+"\", value, \""+sourcePropertyName+"\");";
         //trace(source);
         return source;
     }
@@ -241,8 +241,8 @@ class ViewProcessor
                 default:
             }
 
-            // The binding property is null this means that there is no child view object that
-            // is being bound to. Instead it means the the binding is happening to a property
+            // If the binding property is null this means that there is no child view object that
+            // is being bound to. Instead it means the binding is happening to a property
             // of the view object itself.
             if(bindingInfo.property == null) return errors;
 
@@ -366,8 +366,7 @@ class ViewProcessor
                             trace("oField expr: "+oField.expr);
                     }
 
-                    bindingInfos.push(
-                        {
+                    bindingInfos.push({
                         type: fieldType,
                         hostPath: path,
                         property: property,
@@ -389,8 +388,7 @@ class ViewProcessor
                         path = s.split(".");
                     default:
                 }
-                bindingInfos.push(
-                    {
+                bindingInfos.push({
                     type: fieldType,
                     hostPath: path,
                     property: null,

@@ -1,5 +1,8 @@
 package org.pixelami.binding;
 
+import org.pixelami.binding.MacroUtil;
+import org.pixelami.binding.MacroUtil;
+import org.pixelami.binding.MacroUtil;
 import haxe.macro.Expr;
 import haxe.macro.Type;
 import haxe.macro.Context;
@@ -89,14 +92,14 @@ class BindingProcessor
             {
                 switch(field.kind)
                 {
-                    // currently only supporting FVar until flash issue is fixed in IWire library
+                    // currently only supporting FVar until flash stack overflow issue is fixed.
                     case FVar(t,exp):
 
                         var setterName = "set_"+field.name;
 
                         var setterSource:String = createSetterSrc(field.name);
                         //trace(setterSource);
-                        var newPos:Position = createPositionAfter(field.pos, 1);
+                        var newPos:Position = MacroUtil.createPositionAfter(field.pos, 1);
 
                         var setterExpr = Context.parse(setterSource, newPos);
 
@@ -130,7 +133,7 @@ class BindingProcessor
 
         }
     }
-
+    /*
     function createPositionAfter(pos:Position, offset:Int):Position
     {
         var posInfo = Context.getPosInfos(pos);
@@ -154,7 +157,7 @@ class BindingProcessor
 
         return Context.makePosition(newPos);
     }
-
+    */
     function createSetterSrc(propertyName:String):String
     {
         var wrapperSrc:String = "{";
@@ -170,7 +173,7 @@ class BindingProcessor
     **/
     public function createTypeIdentifierField()
     {
-        var newPos = createPositionBefore(fields[0].pos, 1);
+        var newPos = MacroUtil.createPositionBefore(fields[0].pos, 1);
         var idField:haxe.macro.Field = {
             kind: FVar(TPath({ name : "String", pack : [], params : [], sub : null }), null),
             meta: [],
@@ -190,7 +193,7 @@ class BindingProcessor
                     case EBlock(block):
 
                         //trace(block[0].pos);
-                        var p = createPositionBefore(block[0].pos, 1);
+                        var p = MacroUtil.createPositionBefore(block[0].pos, 1);
                         var fqcn:String = "\""+currentClass.toString()+"\"";
                         var src:String = "__ID__ = "+fqcn;
                         //trace(src);
