@@ -133,31 +133,7 @@ class BindingProcessor
 
         }
     }
-    /*
-    function createPositionAfter(pos:Position, offset:Int):Position
-    {
-        var posInfo = Context.getPosInfos(pos);
-        var newPos = {
-            min: posInfo.max + offset,
-            max: posInfo.max + offset,
-            file: posInfo.file
-        };
 
-        return Context.makePosition(newPos);
-    }
-
-    function createPositionBefore(pos:Position, offset:Int):Position
-    {
-        var posInfo = Context.getPosInfos(pos);
-        var newPos = {
-            min: posInfo.min - offset,
-            max: posInfo.min - offset,
-            file: posInfo.file
-        };
-
-        return Context.makePosition(newPos);
-    }
-    */
     function createSetterSrc(propertyName:String):String
     {
         var wrapperSrc:String = "{";

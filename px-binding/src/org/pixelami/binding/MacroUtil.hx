@@ -79,6 +79,6 @@ class MacroUtil
 
         }
         neko.Lib.print(errorMsg);
-        Context.error("Errors encountered while building view", pos);
+        Context.error("Errors encountered: ", pos);
     }
 }
