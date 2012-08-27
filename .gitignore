@@ -1,5 +1,6 @@
 *.iml
 build/
+report/
 .DS_Store
 .idea
 Main.build
