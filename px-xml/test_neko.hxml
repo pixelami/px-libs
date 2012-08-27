@@ -1,0 +1,13 @@
+# Neko
+-main TestMain
+-lib munit
+-lib hamcrest
+-cp src
+
+-cp test
+-neko build/neko_test.n
+
+--macro org.pixelami.xml.ElementRegistryBuilder.buildRegistry()
+
+-resource /resources/template1.xml@template1
+-resource /resources/template2.xml@template2

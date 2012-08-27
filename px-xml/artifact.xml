@@ -1,0 +1,23 @@
+<artifact>
+
+    <id>px-xml</id>
+    <group>org.pixelami</group>
+    <version>0.0.1-SNAPSHOT</version>
+    <nature>haxe</nature>
+
+    <dependencies>
+
+        <dependency>
+            <id>haxe-sdk</id>
+            <group>org.haxe</group>
+            <version>2.09</version>
+            <type>compiler</type>
+        </dependency>
+
+    </dependencies>
+
+    <scm>
+        <git url="git@github.com:pixelami/px-libs.git"/>
+    </scm>
+
+</artifact>
