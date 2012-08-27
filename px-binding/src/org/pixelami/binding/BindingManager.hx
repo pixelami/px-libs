@@ -20,6 +20,7 @@ class BindingManagerDefaultImpl
 {
     public static inline var SINGLETON:String = "org.pixelami.binding.BindingManager.getInstance()";
     public static inline var CREATE_BINDING:String = SINGLETON + ".createBinding";
+    public static inline var RELEASE_BINDING:String = SINGLETON + ".releaseBinding";
     public static inline var UPDATE:String = SINGLETON + ".update";
 
     private static var _instance:BindingManager;

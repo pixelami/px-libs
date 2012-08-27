@@ -8,7 +8,6 @@ import haxe.macro.Context;
 
 class ViewProcessor
 {
-
     var localClass:haxe.macro.Ref<ClassType>;
     var bindingInfos:Array<BindingInfo>;
     var fieldHash:Hash<Field>;
@@ -111,13 +110,15 @@ class ViewProcessor
                 var newPos:Position = MacroUtil.createPositionAfter(field.pos, 1);
 
 
-                var src:String = createConstructorBlockSource(sources);
+                var src:String = createSetterBlockSource(field, sources);
                 //trace(src);
                 var setterExpr = Context.parse(src, newPos);
 
+                var arg0 = {name:"value", type:t, opt:false, value:null};
+
                 var setterFunction = FFun({
                     expr: setterExpr,
-                    args: [{name:"value", type:t, opt:false, value:null}],
+                    args: [arg0],
                     ret: t,
                     params: []
                 });
@@ -139,22 +140,28 @@ class ViewProcessor
 
             case FProp(get,set,t,exp):
                 // TODO adjust setter
+                // TODO currently wrapping a prop causes a stack overflow in Flash target
+                Context.warning("FProp(get,set,t,e) not supported yet", field.pos);
 
 
             default:
-                Context.error("FProp(get,set,t,e) required", field.pos);
+                Context.error("FVar(t,exp) or FProp(get,set,t,e) required", field.pos);
         }
     }
 
-    function createConstructorBlockSource(lines:Array<String>):String
+    // TODO remove previous binding if there was one
+    function createSetterBlockSource(field:Field, lines:Array<String>):String
     {
         var src:String = "{";
+        src += "\n\tif(" + field.name + " != null) " + BindingManager.RELEASE_BINDING + "(this," + field.name + ");";
+        src += "\n\tif(value != null)";
+        src += "\n\t{";
         for(line in lines)
         {
-            src += "\n\t" + line;
+            src += "\n\t\t" + line;
         }
-
-        src += "\n\treturn model = value;";
+        src += "\n\t}";
+        src += "\n\treturn "+field.name+" = value;";
         src += "\n}";
         return src;
     }
@@ -175,7 +182,7 @@ class ViewProcessor
         var sourcePropertyName = info.hostPath[info.hostPath.length - 1];
 
         var source:String = BindingManager.CREATE_BINDING + "(this,\""+targetPath+"\", value, \""+sourcePropertyName+"\");";
-        //trace(source);
+        trace(source);
         return source;
     }
 

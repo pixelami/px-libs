@@ -57,11 +57,13 @@ class BindingProcessor
                             bindables.push(field);
                         }
                     }
+
                 case FFun(f):
                     if(field.name == "new")
                     {
                         constructor = field;
                     }
+
                 default:
             }
         }
