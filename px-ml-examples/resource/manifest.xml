@@ -1,0 +1,11 @@
+<manifest>
+    <Component name="px:CheckBox"  class="nl.emceekay.ui.CheckBox" />
+    <Component name="px:Component"  class="nl.emceekay.ui.Component" />
+    <Component name="px:HBox"  class="nl.emceekay.ui.HBox" />
+    <Component name="px:InputText"  class="nl.emceekay.ui.InputText" />
+    <Component name="px:Label"  class="nl.emceekay.ui.Label" />
+    <Component name="px:PushButton"  class="nl.emceekay.ui.PushButton" />
+    <Component name="px:RadioButton"  class="nl.emceekay.ui.RadioButton" />
+    <Component name="px:Text"  class="nl.emceekay.ui.Text" />
+    <Component name="px:VBox"  class="nl.emceekay.ui.VBox" />
+</manifest>

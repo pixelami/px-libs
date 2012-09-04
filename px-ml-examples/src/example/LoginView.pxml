@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<px:Component xmlns:px="http://pixelami.org/pxml">
+    <px:Declarations>
+
+    </px:Declarations>
+    <hx:Script>
+    <![CDATA[
+        import example.LoginPresentationModel;
+
+        @Bindable
+        public var model:LoginPresentationModel;
+    ]]>
+    </hx:Script>
+    <px:VBox x="0" y="0" width="200">
+        <px:InputText id="usernameInput" width="100%" text="{model.usernamePrompt}"/>
+        <px:InputText id="passwordInput" width="100%"/>
+        <px:HBox width="100%">
+            <px:CheckBox />
+            <px:PushButton />
+        </px:HBox>
+    </px:VBox>
+</px:Component>
