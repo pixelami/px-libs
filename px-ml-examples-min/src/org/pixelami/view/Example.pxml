@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<px:HBox
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.pixelami.com hxmc.xsd"
+    xmlns:px="http://www.pixelami.com/px"
+    >
+    <px:PushButton />
+    <px:FPSMeter />
+    <px:Label />
+    <px:Panel />
+    <px:InputText />
+    <px:CheckBox />
+    <px:IndicatorLight />
+    <px:Meter />
+    <px:PieChart />
+    <px:BarChart />
+    <px:LineChart />
+    <px:RadioButton />
+    <px:ProgressBar />
+    <px:NumericStepper />
+    <px:RangeSlider />
+    <px:HUISlider />
+    <px:Calendar />
+    <px:List />
+    <px:VBox />
+    <px:HSlider />
+    <px:HBox />
+    <px:VUISlider />
+    <px:VRangeSlider />
+    <px:ComboBox />
+    <px:TextArea />
+    <px:ColorChooser />
+    <px:Knob />
+    <px:ScrollBar />
+    <px:RotarySelector />
+    <px:WheelMenu />
+    <px:Window />
+    <px:ComboBox />
+    <px:ScrollPane />
+    <px:PieChart />
+    <px:Accordion />
+    <px:TabPanel />
+    <px:List />
+</px:HBox>

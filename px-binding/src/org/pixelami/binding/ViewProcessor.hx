@@ -29,7 +29,7 @@ class ViewProcessor
 
         for(field in fields)
         {
-            trace(field);
+            //trace(field);
             fieldHash.set(field.name, field);
 
             var bindInfos:Array<BindingInfo> = processFieldBindMeta(field);
@@ -111,7 +111,7 @@ class ViewProcessor
 
 
                 var src:String = createSetterBlockSource(field, sources);
-                //trace(src);
+                trace(src);
                 var setterExpr = Context.parse(src, newPos);
 
                 var arg0 = {name:"value", type:t, opt:false, value:null};

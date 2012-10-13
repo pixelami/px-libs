@@ -73,10 +73,15 @@ class CodeGenerator
 
     function generateChildren(id:String, t:TypeElement)
     {
-        for(c in t.children)
+        trace(t);
+        //if(Reflect.hasField(t, "children"))
         {
-            _generate(c, id);
+            for(c in t.children)
+            {
+                _generate(c, id);
+            }
         }
+
     }
 
     function appendCodeBlock(element:ScriptElement)
@@ -267,6 +272,11 @@ class CodeGenerator
         return bindableSource.join("\n");
     }
 
+    function getImports()
+    {
+        return imports == null ? "" : imports;
+    }
+
     function getValueFromBinding(binding:String):String
     {
         var val:String = binding.substr(1, binding.length - 2);
@@ -303,7 +313,7 @@ class CodeGenerator
         classString = StringTools.replace(classString, "${publicVars}", getPublicVars());
         classString = StringTools.replace(classString, "${classBody}", getChildrenBody());
         classString = StringTools.replace(classString, "${scriptBlock}", "");
-        classString = StringTools.replace(classString, "${imports}", imports);
+        classString = StringTools.replace(classString, "${imports}", getImports());
         return classString;
     }
 }

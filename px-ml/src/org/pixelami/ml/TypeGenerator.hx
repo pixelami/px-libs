@@ -59,8 +59,9 @@ class TypeGenerator
             var markup:String = neko.io.File.getContent(file);
             trace("markup: "+markup);
             var xml:Xml = Xml.parse(markup);
+            trace(xml.firstElement());
             var elementTree = walker.walk(xml.firstElement());
-            //trace("elementTree: "+elementTree);
+            trace(elementTree);
             generator.generate(elementTree);
 
 

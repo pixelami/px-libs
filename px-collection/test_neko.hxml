@@ -1,0 +1,10 @@
+# Neko
+-main TestMain
+-lib msignal:1.0.0
+-lib munit:0.9.4.2
+-lib hamcrest:1.0.0
+
+-cp src
+
+-cp test
+-neko build/neko_test.n

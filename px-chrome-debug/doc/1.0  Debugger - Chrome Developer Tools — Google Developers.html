@@ -1,0 +1,3147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="/js/script_head.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script id="jqueryui" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
+    <script src="//www.google.com/jsapi?key=AIzaSyCZfHRnq7tigC-COeQRmoa9Cxr0vbrK6xw"></script>
+    <script>
+      google.load('visualization', '1', {packages: ['table']});
+    </script>
+    <script type="text/javascript" src="//www.gstatic.com/feedback/api.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/js/html5shim/html5.js"></script>
+    <![endif]-->
+
+    
+    <script>
+      google.load('search', '1', {language : 'en'});
+    </script>
+    
+
+    
+  <script type="text/javascript">
+    var contentTimer = new window.jstiming.Timer();
+
+    var ___gcfg = ___gcfg || {};
+    ___gcfg.lang = 'en';
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
+  
+  <title>1.0: Debugger - Chrome Developer Tools &mdash; Google Developers</title>
+  
+  
+  
+ 
+ 
+ 
+ 
+
+
+    
+    
+
+  </head>
+  <body class="two-column docs">
+    <div id="sandbar">
+      
+      <a href="/sandbar?q=&page_url=/chrome-developer-tools/docs/protocol/1.0/debugger"></a>
+      <div id="gc-googlebar"></div>
+      <img src="/images/google-logo.png" style="display:none;"/>
+      
+    </div>
+    
+    
+
+    <div id="gc-wrapper">
+      
+      <input id="gc-analytics" type="hidden" value="UA-24532603-1" />
+      
+
+      
+      <div id="gc-topnav">
+        <div>
+          <ul>
+            
+            <li class=""><a href="/">Home</a></li>
+            
+            <li class="active"><a href="/products/">Products</a></li>
+            
+            <li class=""><a href="/events/">Events</a></li>
+            
+            <li class=""><a href="/showcase/">Showcase</a></li>
+            
+            <li class=""><a href="/live/">Live</a></li>
+            
+            <li class=""><a href="/groups/">Groups</a></li>
+            
+          </ul>
+        </div>
+      </div>
+      
+      
+
+      
+      <div id="gc-appbar">
+        
+        <h1>
+          
+
+  <a href="/chrome-developer-tools/">Chrome Developer Tools</a>
+  <div class="plusone-container">
+    <div class="g-plusone"
+      data-href="https://developers.google.com/chrome-developer-tools/"
+      data-size="medium"
+      data-count="count"
+      data-source="google:developers"></div>
+  </div>
+
+
+
+
+
+
+
+        </h1>
+        
+      </div>
+      
+
+      
+      <div id="gc-main">
+        
+      <div id="gc-sidebar">
+        
+
+  
+
+
+
+  <nav class="gc-toc"><ul><li class=""><a href="/chrome-developer-tools/docs/overview" data-title="Overview"><span>Overview</span></a></li><li class=""><span class="tlw-title" data-title="Documentation">Documentation</span><ul><li class=""><a href="/chrome-developer-tools/docs/elements" data-title="Elements Panel"><span>Elements Panel</span></a><ul><li class=""><a href="/chrome-developer-tools/docs/elements-styles" data-title="Styles"><span>Styles</span></a></li></ul></li><li class=""><a href="/chrome-developer-tools/docs/resources" data-title="Resources Panel"><span>Resources Panel</span></a></li><li class=""><a href="/chrome-developer-tools/docs/network" data-title="Network Panel"><span>Network Panel</span></a></li><li class=""><a href="/chrome-developer-tools/docs/scripts" data-title="Scripts Panel"><span>Scripts Panel</span></a><ul><li class=""><a href="/chrome-developer-tools/docs/scripts-breakpoints" data-title="Breakpoints"><span>Breakpoints</span></a></li><li class=""><a href="/chrome-developer-tools/docs/scripts-exceptions" data-title="Exceptions"><span>Exceptions</span></a></li></ul></li><li class=""><a href="/chrome-developer-tools/docs/timeline" data-title="Timeline Panel"><span>Timeline Panel</span></a></li><li class=""><a href="/chrome-developer-tools/docs/profiles" data-title="Profiles Panel"><span>Profiles Panel</span></a><ul><li class=""><a href="/chrome-developer-tools/docs/cpu-profiling" data-title="CPU Profiling"><span>CPU Profiling</span></a></li><li class=""><a href="/chrome-developer-tools/docs/heap-profiling" data-title="Heap Profiling"><span>Heap Profiling</span></a><ul><li class=""><a href="/chrome-developer-tools/docs/memory-analysis-101" data-title="Memory 101"><span>Memory 101</span></a></li></ul></li><li class=""><span class="tlw-title" data-title="Heap profiler demos">Heap profiler demos</span><ul><li class=""><a href="/chrome-developer-tools/docs/heap-profiling-summary" data-title="Gathering Scattered Objects"><span>Gathering Scattered Objects</span></a></li><li class=""><a href="/chrome-developer-tools/docs/heap-profiling-comparison" data-title="Verifying Action Cleanness"><span>Verifying Action Cleanness</span></a></li><li class=""><a href="/chrome-developer-tools/docs/heap-profiling-containment" data-title="Exploring the Heap Contents"><span>Exploring the Heap Contents</span></a></li><li class=""><a href="/chrome-developer-tools/docs/heap-profiling-dom-leaks" data-title="Uncovering DOM Leaks"><span>Uncovering DOM Leaks</span></a></li><li class=""><a href="/chrome-developer-tools/docs/heap-profiling-dominators" data-title="Finding Accumulation Points"><span>Finding Accumulation Points</span></a></li></ul></li></ul></li><li class=""><a href="/chrome-developer-tools/docs/console" data-title="Console"><span>Console</span></a></li><li class=""><a href="/chrome-developer-tools/docs/shortcuts" data-title="Keyboard Shortcuts"><span>Keyboard Shortcuts</span></a></li><li class=""><a href="/chrome-developer-tools/docs/remote-debugging" data-title="Remote Debugging"><span>Remote Debugging</span></a><ul><li class=""><a href="/chrome-developer-tools/docs/protocol/1.0/index" data-title="1.0"><span>1.0</span></a><ul><li class=""><a href="/chrome-developer-tools/docs/protocol/1.0/console" data-title="Console"><span>Console</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/1.0/debugger" data-title="Debugger"><span>Debugger</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/1.0/dom" data-title="DOM"><span>DOM</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/1.0/domdebugger" data-title="DOM Debugger"><span>DOM Debugger</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/1.0/network" data-title="Network"><span>Network</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/1.0/page" data-title="Page"><span>Page</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/1.0/runtime" data-title="Runtime"><span>Runtime</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/1.0/timeline" data-title="Timeline"><span>Timeline</span></a></li></ul></li><li class=""><a href="/chrome-developer-tools/docs/protocol/0.1/index" data-title="0.1"><span>0.1</span></a><ul><li class=""><a href="/chrome-developer-tools/docs/protocol/0.1/console" data-title="Console"><span>Console</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/0.1/debugger" data-title="Debugger"><span>Debugger</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/0.1/dom" data-title="DOM"><span>DOM</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/0.1/domdebugger" data-title="DOM Debugger"><span>DOM Debugger</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/0.1/network" data-title="Network"><span>Network</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/0.1/page" data-title="Page"><span>Page</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/0.1/runtime" data-title="Runtime"><span>Runtime</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/0.1/timeline" data-title="Timeline"><span>Timeline</span></a></li></ul></li><li class=""><a href="/chrome-developer-tools/docs/protocol/tot/index" data-title="tip-of-tree"><span>tip-of-tree</span></a><ul><li class=""><a href="/chrome-developer-tools/docs/protocol/tot/console" data-title="Console"><span>Console</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/tot/debugger" data-title="Debugger"><span>Debugger</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/tot/dom" data-title="DOM"><span>DOM</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/tot/domdebugger" data-title="DOM Debugger"><span>DOM Debugger</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/tot/network" data-title="Network"><span>Network</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/tot/page" data-title="Page"><span>Page</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/tot/runtime" data-title="Runtime"><span>Runtime</span></a></li><li class=""><a href="/chrome-developer-tools/docs/protocol/tot/timeline" data-title="Timeline"><span>Timeline</span></a></li></ul></li></ul></li></ul></li><li class=""><span class="tlw-title" data-title="Resources">Resources</span><ul><li class=""><a href="/chrome-developer-tools/docs/videos" data-title="Videos"><span>Videos</span></a></li><li class=""><a href="/chrome-developer-tools/docs/blog-posts" data-title="Blog posts"><span>Blog posts</span></a></li><li class=""><a href="https://groups.google.com/forum/?fromgroups#!forum/google-chrome-developer-tools" data-title="Forum"><span>Forum</span></a></li></ul></li><li class=""><a href="/chrome-developer-tools/docs/contributing" data-title="Contributing"><span>Contributing</span></a></li></ul></nav>
+
+
+
+      </div>
+
+      <div id="gc-content">
+        
+        <div>
+          
+  
+  <h1 class="page-title" >1.0: Debugger</h1>
+  
+  
+<link rel="stylesheet" type="text/css" href="/chrome-developer-tools/docs/protocol/css/protocol.css"/> 
+<div>
+ <!-- TABLE OF CONTENTS -->
+ <div id="toc">
+ <h2>Contents</h2>
+ <ol>
+ 
+ <li>
+ <a href='#commands'">Commands</a>
+ <ol>
+ 
+ <li>
+ <a href="#command-canSetScriptSource" href="#command-anchor">canSetScriptSource</a>
+ </li>
+ 
+ <li>
+ <a href="#command-continueToLocation" href="#command-anchor">continueToLocation</a>
+ </li>
+ 
+ <li>
+ <a href="#command-disable" href="#command-anchor">disable</a>
+ </li>
+ 
+ <li>
+ <a href="#command-enable" href="#command-anchor">enable</a>
+ </li>
+ 
+ <li>
+ <a href="#command-evaluateOnCallFrame" href="#command-anchor">evaluateOnCallFrame</a>
+ </li>
+ 
+ <li>
+ <a href="#command-getScriptSource" href="#command-anchor">getScriptSource</a>
+ </li>
+ 
+ <li>
+ <a href="#command-pause" href="#command-anchor">pause</a>
+ </li>
+ 
+ <li>
+ <a href="#command-removeBreakpoint" href="#command-anchor">removeBreakpoint</a>
+ </li>
+ 
+ <li>
+ <a href="#command-resume" href="#command-anchor">resume</a>
+ </li>
+ 
+ <li>
+ <a href="#command-searchInContent" href="#command-anchor">searchInContent</a>
+ </li>
+ 
+ <li>
+ <a href="#command-setBreakpoint" href="#command-anchor">setBreakpoint</a>
+ </li>
+ 
+ <li>
+ <a href="#command-setBreakpointByUrl" href="#command-anchor">setBreakpointByUrl</a>
+ </li>
+ 
+ <li>
+ <a href="#command-setBreakpointsActive" href="#command-anchor">setBreakpointsActive</a>
+ </li>
+ 
+ <li>
+ <a href="#command-setPauseOnExceptions" href="#command-anchor">setPauseOnExceptions</a>
+ </li>
+ 
+ <li>
+ <a href="#command-setScriptSource" href="#command-anchor">setScriptSource</a>
+ </li>
+ 
+ <li>
+ <a href="#command-stepInto" href="#command-anchor">stepInto</a>
+ </li>
+ 
+ <li>
+ <a href="#command-stepOut" href="#command-anchor">stepOut</a>
+ </li>
+ 
+ <li>
+ <a href="#command-stepOver" href="#command-anchor">stepOver</a>
+ </li>
+ 
+ </ol>
+ </li>
+ 
+ 
+ <li>
+ <a href='#events'">Notifications</a>
+ <ol>
+ 
+ <li>
+ <a href="#event-breakpointResolved" href="#command-anchor">breakpointResolved</a>
+ </li>
+ 
+ <li>
+ <a href="#event-globalObjectCleared" href="#command-anchor">globalObjectCleared</a>
+ </li>
+ 
+ <li>
+ <a href="#event-paused" href="#command-anchor">paused</a>
+ </li>
+ 
+ <li>
+ <a href="#event-resumed" href="#command-anchor">resumed</a>
+ </li>
+ 
+ <li>
+ <a href="#event-scriptFailedToParse" href="#command-anchor">scriptFailedToParse</a>
+ </li>
+ 
+ <li>
+ <a href="#event-scriptParsed" href="#command-anchor">scriptParsed</a>
+ </li>
+ 
+ </ol>
+ </li>
+ </li>
+ 
+ 
+ <li>
+ <a href="#types">Types</a>
+ <ol>
+ 
+ <li>
+ <a href="#type-BreakpointId">BreakpointId</a>
+ </li>
+ 
+ <li>
+ <a href="#type-CallFrame">CallFrame</a>
+ </li>
+ 
+ <li>
+ <a href="#type-CallFrameId">CallFrameId</a>
+ </li>
+ 
+ <li>
+ <a href="#type-Location">Location</a>
+ </li>
+ 
+ <li>
+ <a href="#type-Scope">Scope</a>
+ </li>
+ 
+ <li>
+ <a href="#type-ScriptId">ScriptId</a>
+ </li>
+ 
+ </ol>
+ </li>
+ 
+ </ol>
+ </div><!-- /TABLE OF CONTENTS -->
+ <!-- API PAGE -->
+ <div>
+ 
+ <p>Debugger domain exposes JavaScript debugging capabilities. It allows setting and removing breakpoints, stepping through execution, exploring stack traces, etc.</p>
+ 
+ <!-- COMMANDS -->
+ 
+ <div class="protocol-group">
+ <a name="commands"></a>
+ <h3>Commands</h3>
+ 
+ <div class="protocol-item">
+ <a name="command-canSetScriptSource"></a>
+ <h4>Debugger.canSetScriptSource</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.canSetScriptSource"
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;,<br>
+ 
+ "result": {<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">result</span>": &lt;boolean&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Tells whether <code>setScriptSource</code> is supported.</p>
+ 
+ 
+ 
+ <!-- RETURNS -->
+ <h4>Returns</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ result
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ boolean
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ True if <code>setScriptSource</code> is supported.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="command-continueToLocation"></a>
+ <h4>Debugger.continueToLocation</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.continueToLocation",<br>
+ 
+ "params": {<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">location</span>": &lt;<a href="#type-Location">Location</a>&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Continues execution until specific location is reached.</p>
+ 
+ 
+ <!-- PARAMETERS -->
+ <h4>Parameters</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ location
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="#type-Location">Location</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Location to continue to.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="command-disable"></a>
+ <h4>Debugger.disable</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.disable"
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Disables debugger for given page.</p>
+ 
+ 
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="command-enable"></a>
+ <h4>Debugger.enable</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.enable"
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Enables debugger for the given page. Clients should not assume that the debugging has been enabled until the result for this command is received.</p>
+ 
+ 
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="command-evaluateOnCallFrame"></a>
+ <h4>Debugger.evaluateOnCallFrame</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.evaluateOnCallFrame",<br>
+ 
+ "params": {<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">callFrameId</span>": &lt;<a href="#type-CallFrameId">CallFrameId</a>&gt;,<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">expression</span>": &lt;string&gt;,<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">objectGroup</span>": &lt;string&gt;,<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">returnByValue</span>": &lt;boolean&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;,<br>
+ 
+ "result": {<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">result</span>": &lt;<a href="runtime.html#type-RemoteObject">Runtime.RemoteObject</a>&gt;,<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">wasThrown</span>": &lt;boolean&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Evaluates expression on a given call frame.</p>
+ 
+ 
+ <!-- PARAMETERS -->
+ <h4>Parameters</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ callFrameId
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="#type-CallFrameId">CallFrameId</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Call frame identifier to evaluate on.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ expression
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ string
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Expression to evaluate.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ objectGroup
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ <span class="optional">optional</span>
+ 
+ string
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ String object group name to put result into (allows rapid releasing resulting object handles using <code>releaseObjectGroup</code>).
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ returnByValue
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ <span class="optional">optional</span>
+ 
+ boolean
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Whether the result is expected to be a JSON object that should be sent by value.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ 
+ <!-- RETURNS -->
+ <h4>Returns</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ result
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="runtime.html#type-RemoteObject">Runtime.RemoteObject</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Object wrapper for the evaluation result.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ wasThrown
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ <span class="optional">optional</span>
+ 
+ boolean
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ True if the result was thrown during the evaluation.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="command-getScriptSource"></a>
+ <h4>Debugger.getScriptSource</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.getScriptSource",<br>
+ 
+ "params": {<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">scriptId</span>": &lt;<a href="#type-ScriptId">ScriptId</a>&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;,<br>
+ 
+ "result": {<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">scriptSource</span>": &lt;string&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Returns source for the script with given id.</p>
+ 
+ 
+ <!-- PARAMETERS -->
+ <h4>Parameters</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ scriptId
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="#type-ScriptId">ScriptId</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Id of the script to get source for.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ 
+ <!-- RETURNS -->
+ <h4>Returns</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ scriptSource
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ string
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Script source.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="command-pause"></a>
+ <h4>Debugger.pause</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.pause"
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Stops on the next JavaScript statement.</p>
+ 
+ 
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="command-removeBreakpoint"></a>
+ <h4>Debugger.removeBreakpoint</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.removeBreakpoint",<br>
+ 
+ "params": {<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">breakpointId</span>": &lt;<a href="#type-BreakpointId">BreakpointId</a>&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Removes JavaScript breakpoint.</p>
+ 
+ 
+ <!-- PARAMETERS -->
+ <h4>Parameters</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ breakpointId
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="#type-BreakpointId">BreakpointId</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ 
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="command-resume"></a>
+ <h4>Debugger.resume</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.resume"
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Resumes JavaScript execution.</p>
+ 
+ 
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="command-searchInContent"></a>
+ <h4>Debugger.searchInContent</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.searchInContent",<br>
+ 
+ "params": {<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">scriptId</span>": &lt;<a href="#type-ScriptId">ScriptId</a>&gt;,<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">query</span>": &lt;string&gt;,<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">caseSensitive</span>": &lt;boolean&gt;,<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">isRegex</span>": &lt;boolean&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;,<br>
+ 
+ "result": {<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">result</span>": &lt;array of <a href="page.html#type-SearchMatch">Page.SearchMatch</a>&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Searches for given string in script content.</p>
+ 
+ 
+ <!-- PARAMETERS -->
+ <h4>Parameters</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ scriptId
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="#type-ScriptId">ScriptId</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Id of the script to search in.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ query
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ string
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ String to search for.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ caseSensitive
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ <span class="optional">optional</span>
+ 
+ boolean
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ If true, search is case sensitive.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ isRegex
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ <span class="optional">optional</span>
+ 
+ boolean
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ If true, treats string parameter as regex.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ 
+ <!-- RETURNS -->
+ <h4>Returns</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ result
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ array of <a href="page.html#type-SearchMatch">Page.SearchMatch</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ List of search matches.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="command-setBreakpoint"></a>
+ <h4>Debugger.setBreakpoint</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.setBreakpoint",<br>
+ 
+ "params": {<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">location</span>": &lt;<a href="#type-Location">Location</a>&gt;,<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">condition</span>": &lt;string&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;,<br>
+ 
+ "result": {<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">breakpointId</span>": &lt;<a href="#type-BreakpointId">BreakpointId</a>&gt;,<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">actualLocation</span>": &lt;<a href="#type-Location">Location</a>&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Sets JavaScript breakpoint at a given location.</p>
+ 
+ 
+ <!-- PARAMETERS -->
+ <h4>Parameters</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ location
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="#type-Location">Location</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Location to set breakpoint in.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ condition
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ <span class="optional">optional</span>
+ 
+ string
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Expression to use as a breakpoint condition. When specified, debugger will only stop on the breakpoint if this expression evaluates to true.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ 
+ <!-- RETURNS -->
+ <h4>Returns</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ breakpointId
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="#type-BreakpointId">BreakpointId</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Id of the created breakpoint for further reference.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ actualLocation
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="#type-Location">Location</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Location this breakpoint resolved into.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="command-setBreakpointByUrl"></a>
+ <h4>Debugger.setBreakpointByUrl</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.setBreakpointByUrl",<br>
+ 
+ "params": {<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">lineNumber</span>": &lt;integer&gt;,<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">url</span>": &lt;string&gt;,<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">urlRegex</span>": &lt;string&gt;,<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">columnNumber</span>": &lt;integer&gt;,<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">condition</span>": &lt;string&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;,<br>
+ 
+ "result": {<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">breakpointId</span>": &lt;<a href="#type-BreakpointId">BreakpointId</a>&gt;,<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">locations</span>": &lt;array of <a href="#type-Location">Location</a>&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Sets JavaScript breakpoint at given location specified either by URL or URL regex. Once this command is issued, all existing parsed scripts will have breakpoints resolved and returned in <code>locations</code> property. Further matching script parsing will result in subsequent <code>breakpointResolved</code> events issued. This logical breakpoint will survive page reloads.</p>
+ 
+ 
+ <!-- PARAMETERS -->
+ <h4>Parameters</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ lineNumber
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ integer
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Line number to set breakpoint at.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ url
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ <span class="optional">optional</span>
+ 
+ string
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ URL of the resources to set breakpoint on.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ urlRegex
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ <span class="optional">optional</span>
+ 
+ string
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Regex pattern for the URLs of the resources to set breakpoints on. Either <code>url</code> or <code>urlRegex</code> must be specified.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ columnNumber
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ <span class="optional">optional</span>
+ 
+ integer
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Offset in the line to set breakpoint at.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ condition
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ <span class="optional">optional</span>
+ 
+ string
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Expression to use as a breakpoint condition. When specified, debugger will only stop on the breakpoint if this expression evaluates to true.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ 
+ <!-- RETURNS -->
+ <h4>Returns</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ breakpointId
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="#type-BreakpointId">BreakpointId</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Id of the created breakpoint for further reference.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ locations
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ <span class="optional">optional</span>
+ 
+ array of <a href="#type-Location">Location</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ List of the locations this breakpoint resolved into upon addition.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="command-setBreakpointsActive"></a>
+ <h4>Debugger.setBreakpointsActive</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.setBreakpointsActive",<br>
+ 
+ "params": {<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">active</span>": &lt;boolean&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Activates / deactivates all breakpoints on the page.</p>
+ 
+ 
+ <!-- PARAMETERS -->
+ <h4>Parameters</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ active
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ boolean
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ New value for breakpoints active state.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="command-setPauseOnExceptions"></a>
+ <h4>Debugger.setPauseOnExceptions</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.setPauseOnExceptions",<br>
+ 
+ "params": {<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">state</span>": &lt;string&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Defines pause on exceptions state. Can be set to stop on all exceptions, uncaught exceptions or no exceptions. Initial pause on exceptions state is <code>none</code>.</p>
+ 
+ 
+ <!-- PARAMETERS -->
+ <h4>Parameters</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ state
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ <span>enumerated</span>
+ string
+ 
+ [
+ 
+ "all"
+ , 
+ 
+ "none"
+ , 
+ 
+ "uncaught"
+ 
+ 
+ ]
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Pause on exceptions mode.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="command-setScriptSource"></a>
+ <h4>Debugger.setScriptSource</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.setScriptSource",<br>
+ 
+ "params": {<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">scriptId</span>": &lt;<a href="#type-ScriptId">ScriptId</a>&gt;,<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">scriptSource</span>": &lt;string&gt;,<br>
+ 
+ <br>}
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;,<br>
+ 
+ "result": {<br>
+ 
+ &nbsp;&nbsp;"<span class="specific">callFrames</span>": &lt;array of <a href="#type-CallFrame">CallFrame</a>&gt;,<br>
+ 
+ <br>}
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Edits JavaScript source live.</p>
+ 
+ 
+ <!-- PARAMETERS -->
+ <h4>Parameters</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ scriptId
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="#type-ScriptId">ScriptId</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Id of the script to edit.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ scriptSource
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ string
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ New content of the script.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ 
+ <!-- RETURNS -->
+ <h4>Returns</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ callFrames
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ <span class="optional">optional</span>
+ 
+ array of <a href="#type-CallFrame">CallFrame</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ New stack trace in case editing has happened while VM was stopped.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="command-stepInto"></a>
+ <h4>Debugger.stepInto</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.stepInto"
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Steps into the function call.</p>
+ 
+ 
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="command-stepOut"></a>
+ <h4>Debugger.stepOut</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.stepOut"
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Steps out of the function call.</p>
+ 
+ 
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="command-stepOver"></a>
+ <h4>Debugger.stepOver</h4>
+ <div class="summary">
+ <!-- REQUEST -->
+ request: {<br>
+ "id": &lt;number&gt;,<br>
+ "method": "Debugger.stepOver"
+ 
+ <div>}</div>
+ <!-- RESPONSE -->
+ response: {<br>
+ "id": &lt;number&gt;,<br>
+ "error": &lt;object&gt;
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ 
+ <p>Steps over the statement.</p>
+ 
+ 
+ 
+ </div>
+ </div>
+  <!-- for commands -->
+ </div>
+  <!-- if commands -->
+ <!-- EVENTS -->
+ 
+ <div class="protocol-group">
+ <a name="events"></a>
+ <h3>Notifications</h3>
+ 
+ <div class="protocol-item">
+ <a name="event-breakpointResolved"></a>
+ <h4>Debugger.breakpointResolved</h4>
+ <div class="summary">
+ {<br>
+ "method": "Debugger.breakpointResolved",<br>
+ 
+ "params": {<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"breakpointId"</span>: &lt;<a href="#type-BreakpointId">BreakpointId</a>&gt;,<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"location"</span>: &lt;<a href="#type-Location">Location</a>&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ <p>Fired when breakpoint is resolved to an actual script and location.</p>
+ 
+ <!-- PARAMETERS -->
+ <h4>Parameters</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ breakpointId
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="#type-BreakpointId">BreakpointId</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Breakpoint unique identifier.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ location
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="#type-Location">Location</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Actual breakpoint location.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="event-globalObjectCleared"></a>
+ <h4>Debugger.globalObjectCleared</h4>
+ <div class="summary">
+ {<br>
+ "method": "Debugger.globalObjectCleared"
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ <p>Called when global has been cleared and debugger client should reset its state. Happens upon navigation or reload.</p>
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="event-paused"></a>
+ <h4>Debugger.paused</h4>
+ <div class="summary">
+ {<br>
+ "method": "Debugger.paused",<br>
+ 
+ "params": {<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"callFrames"</span>: &lt;array of <a href="#type-CallFrame">CallFrame</a>&gt;,<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"reason"</span>: &lt;string&gt;,<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"data"</span>: &lt;object&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ <p>Fired when the virtual machine stopped on breakpoint or exception or any other stop criteria.</p>
+ 
+ <!-- PARAMETERS -->
+ <h4>Parameters</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ callFrames
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ array of <a href="#type-CallFrame">CallFrame</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Call stack the virtual machine stopped on.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ reason
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ <span>enumerated</span>
+ string
+ 
+ [
+ 
+ "DOM"
+ , 
+ 
+ "EventListener"
+ , 
+ 
+ "XHR"
+ , 
+ 
+ "exception"
+ , 
+ 
+ "other"
+ 
+ 
+ ]
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Pause reason.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ data
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ <span class="optional">optional</span>
+ 
+ object
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Object containing break-specific auxiliary properties.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="event-resumed"></a>
+ <h4>Debugger.resumed</h4>
+ <div class="summary">
+ {<br>
+ "method": "Debugger.resumed"
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ <p>Fired when the virtual machine resumed execution.</p>
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="event-scriptFailedToParse"></a>
+ <h4>Debugger.scriptFailedToParse</h4>
+ <div class="summary">
+ {<br>
+ "method": "Debugger.scriptFailedToParse",<br>
+ 
+ "params": {<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"url"</span>: &lt;string&gt;,<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"scriptSource"</span>: &lt;string&gt;,<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"startLine"</span>: &lt;integer&gt;,<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"errorLine"</span>: &lt;integer&gt;,<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"errorMessage"</span>: &lt;string&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ <p>Fired when virtual machine fails to parse the script.</p>
+ 
+ <!-- PARAMETERS -->
+ <h4>Parameters</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ url
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ string
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ URL of the script that failed to parse.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ scriptSource
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ string
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Source text of the script that failed to parse.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ startLine
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ integer
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Line offset of the script within the resource.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ errorLine
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ integer
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Line with error.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ errorMessage
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ string
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Parse error message.
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ </div>
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="event-scriptParsed"></a>
+ <h4>Debugger.scriptParsed</h4>
+ <div class="summary">
+ {<br>
+ "method": "Debugger.scriptParsed",<br>
+ 
+ "params": {<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"scriptId"</span>: &lt;<a href="#type-ScriptId">ScriptId</a>&gt;,<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"url"</span>: &lt;string&gt;,<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"startLine"</span>: &lt;integer&gt;,<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"startColumn"</span>: &lt;integer&gt;,<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"endLine"</span>: &lt;integer&gt;,<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"endColumn"</span>: &lt;integer&gt;,<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"isContentScript"</span>: &lt;boolean&gt;,<br>
+ 
+ &nbsp;&nbsp;<span class="specific">"sourceMapURL"</span>: &lt;string&gt;
+ 
+ <br>}
+ 
+ <div>}</div>
+ </div>
+ <div class="description">
+ <p>Fired when virtual machine parses script. This event is also fired for all known and uncollected scripts upon enabling debugger.</p>
+ 
+ <!-- PARAMETERS -->
+ <h4>Parameters</h4>
+ <div class="parameters">
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ scriptId
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="#type-ScriptId">ScriptId</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Identifier of the script parsed.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ url
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ string
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ URL or name of the script parsed (if any).
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ startLine
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ integer
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Line offset of the script within the resource with given URL (for script tags).
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ startColumn
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ integer
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Column offset of the script within the resource with given URL.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ endLine
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ integer
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Last line of the script.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ endColumn
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ integer
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Length of the last line of the script.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ isContentScript
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ <span class="optional">optional</span>
+ 
+ boolean
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Determines whether this script is a user extension script.
+ 
+ </div>
+</span>
+</div>
+ 
+ <div><span class="value">
+ <strong>
+ <var>
+
+ sourceMapURL
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ <span class="optional">optional</span>
+ 
+ string
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ URL of source map associated with script (if any).
+ 
+ </div>
+</span>
+</div>
+ 
+ </div>
+ 
+ </div>
+ </div>
+  <!-- for events -->
+ </div>
+  <!-- if events -->
+ <!-- TYPES -->
+ 
+ <a name="types" id="types"></a>
+ <h3 id="types">Types</h3>
+ 
+ <div class="protocol-item">
+ <a name="type-BreakpointId"></a>
+ <h4>BreakpointId: <var>string</var></h4>
+ 
+ 
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="type-CallFrame"></a>
+ <h4>CallFrame: <var>object</var></h4>
+ 
+ 
+ <div class="property">
+ <span class="value">
+ <strong>
+ <var>
+
+ callFrameId
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="#type-CallFrameId">CallFrameId</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Call frame identifier. This identifier is only valid while the virtual machine is paused.
+ 
+ </div>
+</span>
+
+ </div>
+ 
+ <div class="property">
+ <span class="value">
+ <strong>
+ <var>
+
+ functionName
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ string
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Name of the JavaScript function called on this call frame.
+ 
+ </div>
+</span>
+
+ </div>
+ 
+ <div class="property">
+ <span class="value">
+ <strong>
+ <var>
+
+ location
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="#type-Location">Location</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Location in the source code.
+ 
+ </div>
+</span>
+
+ </div>
+ 
+ <div class="property">
+ <span class="value">
+ <strong>
+ <var>
+
+ scopeChain
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ array of <a href="#type-Scope">Scope</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Scope chain for this call frame.
+ 
+ </div>
+</span>
+
+ </div>
+ 
+ <div class="property">
+ <span class="value">
+ <strong>
+ <var>
+
+ this
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="runtime.html#type-RemoteObject">Runtime.RemoteObject</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ <code>this</code> object for this call frame.
+ 
+ </div>
+</span>
+
+ </div>
+ 
+ 
+ 
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="type-CallFrameId"></a>
+ <h4>CallFrameId: <var>string</var></h4>
+ 
+ 
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="type-Location"></a>
+ <h4>Location: <var>object</var></h4>
+ 
+ 
+ <div class="property">
+ <span class="value">
+ <strong>
+ <var>
+
+ columnNumber
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ <span class="optional">optional</span>
+ 
+ integer
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Column number in the script.
+ 
+ </div>
+</span>
+
+ </div>
+ 
+ <div class="property">
+ <span class="value">
+ <strong>
+ <var>
+
+ lineNumber
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ integer
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Line number in the script.
+ 
+ </div>
+</span>
+
+ </div>
+ 
+ <div class="property">
+ <span class="value">
+ <strong>
+ <var>
+
+ scriptId
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="#type-ScriptId">ScriptId</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Script identifier as reported in the <code>Debugger.scriptParsed</code>.
+ 
+ </div>
+</span>
+
+ </div>
+ 
+ 
+ 
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="type-Scope"></a>
+ <h4>Scope: <var>object</var></h4>
+ 
+ 
+ <div class="property">
+ <span class="value">
+ <strong>
+ <var>
+
+ object
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ 
+ <a href="runtime.html#type-RemoteObject">Runtime.RemoteObject</a>
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Object representing the scope. For <code>global</code> and <code>with</code> scopes it represents the actual object; for the rest of the scopes, it is artificial transient object enumerating scope variables as its properties.
+ 
+ </div>
+</span>
+
+ </div>
+ 
+ <div class="property">
+ <span class="value">
+ <strong>
+ <var>
+
+ type
+
+ <!-- TYPE -->
+ <div style="display:inline">
+ (
+ 
+ <span>enumerated</span>
+ string
+ 
+ [
+ 
+ "catch"
+ , 
+ 
+ "closure"
+ , 
+ 
+ "global"
+ , 
+ 
+ "local"
+ , 
+ 
+ "with"
+ 
+ 
+ ]
+ 
+ )
+ </div>
+ </var>
+ </strong>
+ <div class="description">
+ Scope type.
+ 
+ </div>
+</span>
+
+ </div>
+ 
+ 
+ 
+ </div>
+ 
+ <div class="protocol-item">
+ <a name="type-ScriptId"></a>
+ <h4>ScriptId: <var>string</var></h4>
+ 
+ 
+ </div>
+  <!-- for types -->
+ </div>
+  <!-- if types -->
+ </div><!-- API PAGE -->
+</div>
+ 
+
+        </div>
+        
+<div id="gc-content-footer">
+
+
+
+<div id="gc-content-last-updated">Last updated April 6, 2012.</div>
+
+</div>
+
+
+
+
+      </div>
+
+      </div>
+      
+
+      
+      <footer id="gc-footer">
+        <div id="gc-copyright">
+          <a href="/">
+            <img id="developers-logo-footer" src="/images/developers-logo-footer.png" alt="Google Developers logo" style="vertical-align: center; float: left"/>
+          </a>
+          <ul>
+            <li><a href="http://www.google.com/">Google</a></li>
+            <li><a href="/readme/terms">Terms of Service</a></li>
+            <li><a href="http://www.google.com/intl/en/privacy/">Privacy Policy</a></li>
+            <li><a href="/jobs">Jobs</a></li>
+            <li><a class="google-feedback" data-p="81425" data-b="Documentation"  data-v="devsite-20120831-rc08.361454334796623356" href="">Report a bug</a></li>
+          </ul>
+        </div>
+        
+        <div id="gc-language">
+          <ul>
+            <li>
+              <form id="setlang" action="/i18n/setlang/" method="post">
+                <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='8d7af04418558fdc632ce84626a895ad' /></div>
+                <select id="footer_language" name="language">
+                  
+                  
+                  <option
+                     value="ar"
+                     >
+                    العربيّة
+                  </option>
+                  
+                  <option
+                     value="bg"
+                     >
+                    български
+                  </option>
+                  
+                  <option
+                     value="ca"
+                     >
+                    català
+                  </option>
+                  
+                  <option
+                     value="zh-cn"
+                     >
+                    简体中文
+                  </option>
+                  
+                  <option
+                     value="zh-tw"
+                     >
+                    繁體中文
+                  </option>
+                  
+                  <option
+                     value="hr"
+                     >
+                    Hrvatski
+                  </option>
+                  
+                  <option
+                     value="cs"
+                     >
+                    česky
+                  </option>
+                  
+                  <option
+                     value="da"
+                     >
+                    Dansk
+                  </option>
+                  
+                  <option
+                     value="nl"
+                     >
+                    Nederlands
+                  </option>
+                  
+                  <option
+                     value="en"
+                      selected="selected" >
+                    English
+                  </option>
+                  
+                  <option
+                     value="fa"
+                     >
+                    فارسی
+                  </option>
+                  
+                  <option
+                     value="fi"
+                     >
+                    suomi
+                  </option>
+                  
+                  <option
+                     value="fr"
+                     >
+                    Français
+                  </option>
+                  
+                  <option
+                     value="de"
+                     >
+                    Deutsch
+                  </option>
+                  
+                  <option
+                     value="el"
+                     >
+                    Ελληνικά
+                  </option>
+                  
+                  <option
+                     value="he"
+                     >
+                    עברית
+                  </option>
+                  
+                  <option
+                     value="hi"
+                     >
+                    Hindi
+                  </option>
+                  
+                  <option
+                     value="hu"
+                     >
+                    Magyar
+                  </option>
+                  
+                  <option
+                     value="id"
+                     >
+                    Bahasa Indonesia
+                  </option>
+                  
+                  <option
+                     value="it"
+                     >
+                    italiano
+                  </option>
+                  
+                  <option
+                     value="ja"
+                     >
+                    日本語
+                  </option>
+                  
+                  <option
+                     value="ko"
+                     >
+                    한국어
+                  </option>
+                  
+                  <option
+                     value="lv"
+                     >
+                    latviešu
+                  </option>
+                  
+                  <option
+                     value="lt"
+                     >
+                    Lithuanian
+                  </option>
+                  
+                  <option
+                     value="nb"
+                     >
+                    Norsk (bokmål)
+                  </option>
+                  
+                  <option
+                     value="nn"
+                     >
+                    Norsk (nynorsk)
+                  </option>
+                  
+                  <option
+                     value="pl"
+                     >
+                    polski
+                  </option>
+                  
+                  <option
+                     value="pt-br"
+                     >
+                    Português Brasileiro
+                  </option>
+                  
+                  <option
+                     value="pt"
+                     >
+                    Português
+                  </option>
+                  
+                  <option
+                     value="ro"
+                     >
+                    Română
+                  </option>
+                  
+                  <option
+                     value="ru"
+                     >
+                    Русский
+                  </option>
+                  
+                  <option
+                     value="sr"
+                     >
+                    српски
+                  </option>
+                  
+                  <option
+                     value="sk"
+                     >
+                    slovenský
+                  </option>
+                  
+                  <option
+                     value="sl"
+                     >
+                    Slovenščina
+                  </option>
+                  
+                  <option
+                     value="es"
+                     >
+                    español
+                  </option>
+                  
+                  <option
+                     value="sv"
+                     >
+                    Svenska
+                  </option>
+                  
+                  <option
+                     value="th"
+                     >
+                    Thai
+                  </option>
+                  
+                  <option
+                     value="tr"
+                     >
+                    Türkçe
+                  </option>
+                  
+                  <option
+                     value="uk"
+                     >
+                    Українська
+                  </option>
+                  
+                  <option
+                     value="vi"
+                     >
+                    Vietnamese
+                  </option>
+                  
+                </select>
+              </form>
+            </li>
+          </ul>
+        </div>
+        
+      </footer>
+      
+    </div>
+    <div id="needAuth" class="msgDialogContent">
+      
+      <h1>Authentication required</h1>
+      
+      <div>
+        You need to be signed in with <a href='http://www.google.com/+'>Google+</a> to do that.
+      </div>
+      <button>Sign in</button>
+      <button>Cancel</button>
+    </div>
+    <div id="signingIn" class="msgDialogContent">
+      
+      <h1>Signing you in...</h1>
+      <div>
+        
+        Google Developers needs your permission to do that.
+      </div>
+      
+      <button>Try again</button>
+      
+      <button>Cancel</button>
+    </div>
+    <script src="/js/script_foot.js"></script>
+    <script>
+      (function($) {
+        devsite.devsite.Init($);
+      })(jQuery);
+
+      
+      devsite.localInit = function() {
+        
+      };
+      
+    </script>
+    <!-- Google Code for PXL - Developers - Codesite - HP - 90d Remarketing List -->
+    <script type="text/javascript">
+    $('#setlang select').each(function() {
+      if ($.browser.msie) {
+        $(this).change(function() {
+          $('#setlang').submit();
+        });
+      } else {
+        $(this).kdSelect({'change': function() {
+          $('#setlang').submit();
+        }});
+      }
+    });
+    </script>
+    <script type="text/javascript">
+      /* <![CDATA[ */
+      var google_conversion_id = 992540712;
+      var google_conversion_language = "en";
+      var google_conversion_format = "3";
+      var google_conversion_color = "ffffff";
+      var google_conversion_label = "qio2CKCPwQMQqPCj2QM";
+      var google_conversion_value = 0;
+      /* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/992540712/?label=qio2CKCPwQMQqPCj2QM&amp;guid=ON&amp;script=0"/>
+      </div>
+    </noscript>
+    
+
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(e) {
+    // Render any carousels on the page
+    $('.carousel').carousel();
+    // Render any feed widgets on the page
+    
+    $('.feed').rss();
+    $('.feed-plain').rss();
+    // Render any OSS widgets on the page.
+    $('.oss').oss();
+    });
+</script>
+
+<script type="text/javascript" defer>
+
+
+$(document).ready(function() {
+    contentTimer.name = 'content';
+    contentTimer.tick('ol');
+    window.jstiming.report(contentTimer);
+
+    // Boilerplate javascript to enable the plusone button
+    var po = document.createElement('script'); po.type = 'text/javascript';
+    po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js?onload=devsite_plusoneLoaded';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(po, s);
+});
+</script>
+
+
+
+
+  </body>
+</html>

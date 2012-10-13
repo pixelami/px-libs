@@ -28,6 +28,7 @@ class TypeMacroUtil
         if(type == null) return null;
 
         var typeInfo:MacroTypeInfo = new MacroTypeInfo();
+        type.type = type;
         typeInfo.typeName = typeName;
 
 

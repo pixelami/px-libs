@@ -6,6 +6,7 @@ class MacroTypeInfo
 {
     public var elementName:String;
     public var typeName:String;
+    public var type:Type;
     public var fields:Hash<ClassField>;
 
     public function new()

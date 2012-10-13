@@ -1,0 +1,20 @@
+<artifact>
+
+    <id>px-net</id>
+    <group>org.pixelami</group>
+    <version>0.0.1-SNAPSHOT</version>
+    <nature>haxe</nature>
+    <extension>zip</extension>
+
+    <dependencies>
+
+        <dependency>
+            <id>haxe-sdk</id>
+            <group>org.haxe</group>
+            <version>2.09</version>
+            <type>compiler</type>
+        </dependency>
+
+    </dependencies>
+
+</artifact>

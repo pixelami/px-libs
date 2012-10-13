@@ -1,0 +1,9 @@
+# Flash 9+
+-main TestMain
+-lib msignal:1.0.0
+-lib munit:0.9.4.2
+-lib hamcrest:1.0.0
+-cp src
+-cp test
+-swf-version 9
+-swf build/as3_test.swf

@@ -1,0 +1,7 @@
+-debug
+-main MainAsync
+-cp src
+-lib hxJson2
+-neko build/debug.n
+
+#-cmd neko build/debug.n
