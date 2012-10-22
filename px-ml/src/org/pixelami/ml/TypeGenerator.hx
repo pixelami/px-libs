@@ -87,9 +87,6 @@ class TypeGenerator
             var ts = Context.getModule(pack.join("."));
             trace(ts);
         }
-
-
-
     }
 
     function splitPath(file:String):Array<String>
@@ -221,4 +218,10 @@ class TypeGenerator
         }
         */
     }
+
+	function generateSchema()
+	{
+		//var schemaGenerator:SchemaGenerator = new SchemaGenerator();
+
+	}
 }

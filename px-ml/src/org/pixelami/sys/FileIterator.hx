@@ -44,4 +44,9 @@ class FileIterator
         files.push(path);
     }
 
+	public function iterator():Iterator<String>
+	{
+		return this;
+	}
+
 }
