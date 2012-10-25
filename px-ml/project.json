@@ -1,0 +1,15 @@
+{
+	"name": "px-ml",
+	"version": "0.0.1-SNAPSHOT",
+	"id": "px-ml",
+
+	"dependencies": [
+	{
+		"id": "px-xml",
+		"verison": "branch:master",
+		"group": "pixelami"
+	}]
+
+	,
+	"scm": { "git": "git@github.com/pixelami/px-libs", "path":"px-ml" }
+}

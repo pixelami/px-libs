@@ -7,20 +7,18 @@ class ${className} extends ${extendedComponent}
 ${publicVars}
 ${bindings}
 
-    public function new(?parent:Dynamic)
+    public function new()
     {
-        super(parent);
+        super();
 
+		// $constructorBody
 ${constructorBody}
-    }
 
-    override public function addChildren()
-    {
-        super.addChildren();
-
+		// $classBody
 ${classBody}
-
     }
+
+
 	///////////////////////////////////////////////////////////////////////////////
 	// Begin <Script> block
 	///////////////////////////////////////////////////////////////////////////////

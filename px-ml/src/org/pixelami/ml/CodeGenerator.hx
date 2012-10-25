@@ -17,7 +17,8 @@ class CodeGenerator
 {
 
 
-    public static inline var UI_TEMPLATE = '/Users/a/dev/workspaces/pihx/px-libs/px-ml/resource/UIType.hx.template';
+    //public static inline var UI_TEMPLATE = '/Users/a/dev/workspaces/pihx/px-libs/px-ml/resource/UIType.hx.template';
+    public static inline var UI_TEMPLATE = '/Users/a/dev/workspaces/pihx/px-libs/px-ml/resource/MUIComponent.hx.template';
 
     public var packagePath:String;
     public var moduleName:String;
@@ -67,7 +68,11 @@ class CodeGenerator
         generateChildren(id, t);
         if(parentId != null)
         {
-            append(parentId + ".addChild(" +id+ ")");
+            // TODO this needs to be overridable to be able support different component libraries
+			// The alternative is to extend the components to all support set_children property
+			// so that they can handle adding children internally. Actually for runtime ml this is necessary.
+            //append(parentId + ".addChild(" +id+ ")");
+            append(parentId + ".addComponent(" +id+ ")");
         }
     }
 
@@ -160,15 +165,24 @@ class CodeGenerator
     function generateValue(id:String, field:String, fieldValue:FieldValue, owner:TypeElement)
     {
         trace("generating: "+fieldValue.value);
-        var v:String = fieldValue.value;
+        var v:Dynamic = fieldValue.value;
+		trace(fieldValue.field);
         if(fieldValue.field == null) return;
+
+		if(Std.is(v, TypeElement))
+		{
+			var typeElement:TypeElement = cast v;
+			v = makeId(typeElement);
+			generateType(v,typeElement);
+
+		}
 
         switch(fieldValue.field.type)
         {
             case TInst(t, params):
 
                 var c:ClassType = t.get();
-
+			    trace("generate "+c.name);
                 switch(c.name)
                 {
                     case "String":

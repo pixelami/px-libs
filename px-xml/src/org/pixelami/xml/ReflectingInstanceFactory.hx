@@ -5,7 +5,7 @@ import org.pixelami.xml.ElementRegistry;
 import org.pixelami.xml.IElementFactory;
 import org.pixelami.xml.XMLUtil;
 
-class ReflectingInstanceFactory extends InstanceFactory, implements IElementFactory
+class ReflectingInstanceFactory extends InstanceFactory, implements IElementFactory, implements IInstanceFactory
 {
     var metaCache:Hash<Dynamic>;
     var meta:Dynamic;
@@ -23,6 +23,11 @@ class ReflectingInstanceFactory extends InstanceFactory, implements IElementFact
 
         return super.createInstance(element);
     }
+
+	public function setProperty(inst:Dynamic, fieldName:String, value:String):Void
+	{
+		Reflect.setProperty(inst, fieldName, castValueForField(value));
+	}
 
     override public function castValueForField(inst:Dynamic, fieldName:String, value:String):Dynamic
     {

@@ -2,7 +2,7 @@ package org.pixelami.xml;
 
 class ElementWalker
 {
-    public var factory:Dynamic;
+    public var factory:IInstanceFactory;
     public var instanceIndex:Hash<Dynamic>;
     public var namespaceIndex:Hash<Dynamic>;
     public var duplicateIdWarnings:Bool;
@@ -114,15 +114,26 @@ class ElementWalker
 
                 if(children.length > 0)
                 {
-                    Reflect.setProperty(parent, parentProperty, children);
+					factory.setProperty(parent, parentProperty, children);
+					/*
+					try
+					{
+						Reflect.setProperty(parent, parentProperty, children);
+					}
+					catch(e:Dynamic)
+					{
+						trace(e);
+						factory.setProperty(parent, parentProperty, children);
+						//if(Std.is(parent, ITypeDescriptor)) cast(parent, ITypeDescriptor).
+					}
+					*/
                     //trace("parent property type:"+Type.typeof(Reflect.field(parent, parentProperty)));
                 }
                 else
                 {
                     if(node.firstChild() != null && node.firstChild().nodeType == Xml.PCData)
                     {
-                        var castValue = factory.castValueForField(parent, parentProperty, node.firstChild().toString());
-                        Reflect.setProperty(parent, parentProperty, castValue);
+						factory.setProperty(parent, parentProperty, node.firstChild().toString());
                     }
                 }
             }
@@ -167,15 +178,25 @@ class ElementWalker
     function hasField(inst:Dynamic,field:String):Bool
     {
         if(inst == null) return false;
-        var type:Class<Dynamic> = Type.getClass(inst);
-        var instanceFields:Array<String> = Type.getInstanceFields(type);
-        for(i in 0...instanceFields.length)
-        {
-            if(instanceFields[i] == field)
-            {
-                return true;
-            }
-        }
-        return false;
+
+		var type:Class<Dynamic> = Type.getClass(inst);
+		var instanceFields:Array<String> = Type.getInstanceFields(type);
+		trace("instanceFields: "+instanceFields);
+		for(i in 0...instanceFields.length)
+		{
+			if(instanceFields[i] == field)
+			{
+				return true;
+			}
+		}
+
+		if(Std.is(inst,ITypeDescriptor))
+		{
+			return cast(inst, ITypeDescriptor).hasField(field);
+		}
+
+		return false;
+
+
     }
 }

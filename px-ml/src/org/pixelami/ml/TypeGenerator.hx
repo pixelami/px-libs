@@ -23,7 +23,7 @@ class TypeGenerator
         var files:Array<String> = [];
         for( p in Context.getClassPath() )
         {
-            if( !neko.FileSystem.exists(p) || !neko.FileSystem.isDirectory(p) )  continue;
+            if( !sys.FileSystem.exists(p) || !sys.FileSystem.isDirectory(p) )  continue;
             //trace(p);
             p = normalizePath(p);
             //trace("normalized path: "+p);
@@ -61,7 +61,7 @@ class TypeGenerator
             var xml:Xml = Xml.parse(markup);
             trace(xml.firstElement());
             var elementTree = walker.walk(xml.firstElement());
-            trace(elementTree);
+            //trace(elementTree);
             generator.generate(elementTree);
 
 

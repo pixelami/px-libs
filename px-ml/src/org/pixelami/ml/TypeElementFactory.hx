@@ -1,10 +1,10 @@
 package org.pixelami.ml;
 
+import org.pixelami.xml.IInstanceFactory;
 import org.pixelami.xml.macro.MacroTypeInfo;
-import org.pixelami.xml.IElementFactory;
 import org.pixelami.xml.ElementRegistry;
 
-class TypeElementFactory implements IElementFactory
+class TypeElementFactory implements IInstanceFactory
 {
     var registry:ElementRegistry;
     var typeInfoMap:Hash<MacroTypeInfo>;
@@ -50,6 +50,21 @@ class TypeElementFactory implements IElementFactory
         trace("fieldType:"+field);
         cast(inst, TypeElement).propertyValueMap.set(fieldName, {field:field, value:value});
     }
+
+	public function setProperty(inst:Dynamic, fieldName:String, value:Dynamic):Void
+	{
+		trace("setting "+fieldName);
+		trace("setting "+cast(inst, TypeElement).typeInfo.typeName);
+
+		var field:haxe.macro.Type.ClassField = cast(inst, TypeElement).typeInfo.fields.get(fieldName);
+		trace("setProperty: "+field);
+		// unpack arrays
+		if(field.name != "Array" && Std.is(value, Array)) value = value[0];
+		cast(inst, TypeElement).propertyValueMap.set(fieldName, {field:field, value:value});
+
+		//var castValue = castValueForField(parent, parentProperty, node.firstChild().toString());
+		//Reflect.setProperty(parent, parentProperty, castValue);
+	}
 
     function getTypeInfo(element:Xml):MacroTypeInfo
     {
