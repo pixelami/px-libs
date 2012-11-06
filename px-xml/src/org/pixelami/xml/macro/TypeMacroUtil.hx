@@ -87,7 +87,7 @@ class TypeMacroUtil
 					//trace("fieldType:"+fieldType.name);
 					if(!fieldMetaAccess.has("type"))
 					{
-						var fqcn = fieldType.pack.join(".") + "." + fieldType.name;
+						var fqcn = fieldType.pack.length > 1 ? fieldType.pack.join(".") + "." + fieldType.name : fieldType.name;
 						fieldMetaAccess.add("type", [{expr:EConst(CString(fqcn)),pos:classType.pos}], classType.pos);
 						//fieldMetaAccess.add("type", [{expr:fieldType.name, pos:classType.pos}], classType.pos);
 					}

@@ -60,21 +60,28 @@ class ReflectingInstanceFactory extends InstanceFactory, implements IInstanceFac
     {
         var attrbs:Iterator<String> = element.attributes();
         var type:Class<Dynamic> = Type.getClass(inst);
-
+		var tFields = Type.getInstanceFields(type);
         for(attr in attrbs)
         {
-            var targetType:Class<Dynamic> = getFieldType(inst, attr);
+            trace("assigning attr: "+attr);
+			var targetType:Class<Dynamic> = getFieldType(inst, attr);
             var value:String = element.get(attr);
+
+			var idx = Lambda.indexOf(tFields, attr);
+			if(idx > -1) trace("classField exists '"+attr+"'");
 
             if(targetType == null)
             {
-                try
+                trace("no target type for attr '"+attr+"'");
+				try
 				{
 					Reflect.setProperty(inst, attr, value);
 				}
 				catch(e:Dynamic)
 				{
+					trace("could not assign '"+attr+"'");
 					trace(e);
+
 					errors.push(new InstanceFactoryException(element, e));
 				}
                 continue;
@@ -107,7 +114,8 @@ class ReflectingInstanceFactory extends InstanceFactory, implements IInstanceFac
         while (type != null)
         {
             var typeMeta = haxe.rtti.Meta.getFields(type);
-
+			trace("typemeta: ");
+			trace(typeMeta);
             for (field in Reflect.fields(typeMeta))
             {
                 var m = Reflect.field(typeMeta, field);
