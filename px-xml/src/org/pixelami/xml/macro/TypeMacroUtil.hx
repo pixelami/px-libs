@@ -47,6 +47,8 @@ class TypeMacroUtil
 					default:
 				}
 
+			case TDynamic(t):
+				trace("TDynamic: " + t);
 
             default:
         }
@@ -58,13 +60,15 @@ class TypeMacroUtil
 	{
 		var classType:ClassType = type;
 
-		var metaAccess:haxe.macro.MetaAccess = classType.meta;
+		typeInfo.defaultPropertyField = getDefaultChildren(type);
+
 		var fields:Array<ClassField> = classType.fields.get();
 
 		var s = classType.superClass;
 		while(s != null)
 		{
 			var _t:ClassType = s.t.get();
+			typeInfo.inheritanceChain.push(_t.pack.join(".") + "." + _t.name);
 			fields = fields.concat(_t.fields.get());
 			s = _t.superClass;
 		}
@@ -74,7 +78,7 @@ class TypeMacroUtil
 		for(field in fields)
 		{
 			var fieldMetaAccess:MetaAccess = field.meta;
-
+			//trace(field);
 			switch(field.type)
 			{
 				case TInst(fieldType, params):
@@ -83,15 +87,47 @@ class TypeMacroUtil
 					//trace("fieldType:"+fieldType.name);
 					if(!fieldMetaAccess.has("type"))
 					{
-						fieldMetaAccess.add("type", [{expr:EConst(CString(fieldType.name)),pos:classType.pos}], classType.pos);
+						var fqcn = fieldType.pack.join(".") + "." + fieldType.name;
+						fieldMetaAccess.add("type", [{expr:EConst(CString(fqcn)),pos:classType.pos}], classType.pos);
 						//fieldMetaAccess.add("type", [{expr:fieldType.name, pos:classType.pos}], classType.pos);
 					}
+				/*
+				case TDynamic(t):
+					//trace(field);
+					trace("TDynamic: " + t + ", field: "+field.name); */
 
 				default:
 			}
-			trace("adding "+field.name);
+			//trace("adding "+field.name);
 			typeInfo.fields.set(field.name, field);
 		}
+	}
+
+	static function getDefaultChildren(classType:haxe.macro.ClassType):String
+	{
+		var metaAccess:haxe.macro.MetaAccess = classType.meta;
+		if(metaAccess.has("defaultProperty"))
+		{
+			var meta:haxe.macro.Metadata = metaAccess.get();
+			for(m in meta)
+			{
+				if(m.name == "defaultProperty")
+				{
+					trace(m.params);
+					var e:haxe.macro.Expr = m.params[0];
+					switch(e.expr)
+					{
+						case EConst(c): switch(c){
+							case CString(s): return s;
+							default:
+						}
+						default:
+					}
+					break;
+				}
+			}
+		}
+		return null;
 	}
 
 

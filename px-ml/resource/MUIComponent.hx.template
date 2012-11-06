@@ -2,6 +2,7 @@ package ${package};
 
 ${imports}
 
+${classMeta}
 class ${className} extends ${extendedComponent}
 {
 ${publicVars}
@@ -14,10 +15,10 @@ ${bindings}
 		// $constructorBody
 ${constructorBody}
 
-		// $classBody
-${classBody}
-    }
 
+    }
+    // $classBody
+${classBody}
 
 	///////////////////////////////////////////////////////////////////////////////
 	// Begin <Script> block

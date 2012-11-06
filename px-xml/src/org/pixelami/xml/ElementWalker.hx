@@ -30,7 +30,7 @@ class ElementWalker
             }
             catch(e:Dynamic)
             {
-                trace(e);
+                //if(e != "Invalid call") trace(e);
             }
         }
 
@@ -53,6 +53,7 @@ class ElementWalker
             catch (e:Dynamic)
             {
                  #if debug
+
                  trace(e);
                  #end
             }
@@ -83,12 +84,7 @@ class ElementWalker
         }
         else
         {
-
-
             var parentProperty:String = "";
-
-
-
             // check if we're a parent property
             try
             {
@@ -115,19 +111,7 @@ class ElementWalker
                 if(children.length > 0)
                 {
 					factory.setProperty(parent, parentProperty, children);
-					/*
-					try
-					{
-						Reflect.setProperty(parent, parentProperty, children);
-					}
-					catch(e:Dynamic)
-					{
-						trace(e);
-						factory.setProperty(parent, parentProperty, children);
-						//if(Std.is(parent, ITypeDescriptor)) cast(parent, ITypeDescriptor).
-					}
-					*/
-                    //trace("parent property type:"+Type.typeof(Reflect.field(parent, parentProperty)));
+
                 }
                 else
                 {
@@ -139,8 +123,10 @@ class ElementWalker
             }
             else
             {
-                trace(node);
-                trace(node.nodeType);
+                trace("Warning: " + parent + " has no field '" + parentProperty + "'" );
+
+                //trace(node);
+                //trace(node.nodeType);
                 // keep walking
                 for(e in node.elements())
                 {
@@ -170,7 +156,7 @@ class ElementWalker
     public function getDefaultChildrenField(instance:Dynamic):String
     {
         var m = haxe.rtti.Meta.getType(Type.getClass(instance));
-        var defaultChildrenField = Reflect.getProperty(m,"defaultChildren");
+        var defaultChildrenField = Reflect.getProperty(m,"defaultProperty");
         if(defaultChildrenField == null) defaultChildrenField = "children";
         return defaultChildrenField;
     }
@@ -181,7 +167,7 @@ class ElementWalker
 
 		var type:Class<Dynamic> = Type.getClass(inst);
 		var instanceFields:Array<String> = Type.getInstanceFields(type);
-		trace("instanceFields: "+instanceFields);
+		//trace("instanceFields: "+instanceFields);
 		for(i in 0...instanceFields.length)
 		{
 			if(instanceFields[i] == field)

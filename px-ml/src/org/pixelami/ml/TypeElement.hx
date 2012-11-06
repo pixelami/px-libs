@@ -15,7 +15,15 @@ class TypeElement implements ITypeDescriptor
 
     public var idField:Dynamic;
 
-    var instanceNumber:Int;
+	public var defaultPropertyField:String;
+
+    public var file:String;
+	public var start:Int;
+	public var end:Int;
+
+	var instanceNumber:Int;
+
+
 
 
 
@@ -37,12 +45,19 @@ class TypeElement implements ITypeDescriptor
 		return hasKey;
 	}
 
+	public function isExtending(className:String):Bool
+	{
+		return Lambda.indexOf(typeInfo.inheritanceChain, className) > -1;
+	}
+
 	public function toString():String
 	{
 		var buf:StringBuf = new StringBuf();
 		buf.add("[TypeElement ");
 		buf.add(typeInfo.typeName);
 		buf.add(" - ");
+		buf.add("["+file+" ("+start+","+end+")]");
+
 		for(prop in propertyValueMap.keys())
 		{
 			buf.add(prop);

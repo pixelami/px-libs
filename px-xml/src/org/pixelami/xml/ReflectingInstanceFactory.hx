@@ -2,10 +2,9 @@ package org.pixelami.xml;
 
 import org.pixelami.xml.InstanceFactory;
 import org.pixelami.xml.ElementRegistry;
-import org.pixelami.xml.IElementFactory;
 import org.pixelami.xml.XMLUtil;
 
-class ReflectingInstanceFactory extends InstanceFactory, implements IElementFactory, implements IInstanceFactory
+class ReflectingInstanceFactory extends InstanceFactory, implements IInstanceFactory
 {
     var metaCache:Hash<Dynamic>;
     var meta:Dynamic;
@@ -14,6 +13,7 @@ class ReflectingInstanceFactory extends InstanceFactory, implements IElementFact
     {
         super(registry);
         metaCache = new Hash<String>();
+		errors = [];
     }
 
     override public function createInstance(element:Xml):Dynamic
@@ -24,28 +24,33 @@ class ReflectingInstanceFactory extends InstanceFactory, implements IElementFact
         return super.createInstance(element);
     }
 
-	public function setProperty(inst:Dynamic, fieldName:String, value:String):Void
+	override public function setProperty(inst:Dynamic, fieldName:String, value:Dynamic):Void
 	{
-		Reflect.setProperty(inst, fieldName, castValueForField(value));
+		var castValue:Dynamic = castValueForField(inst, fieldName, value);
+		Reflect.setProperty(inst, fieldName, castValue );
 	}
 
-    override public function castValueForField(inst:Dynamic, fieldName:String, value:String):Dynamic
+    override public function castValueForField(inst:Dynamic, fieldName:String, value:Dynamic):Dynamic
     {
         var type:Class<Dynamic> = Type.getClass(inst);
         buildMeta(type);
 
         var fieldType:Class<Dynamic> = getFieldType(inst, fieldName);
-        var cValue:Dynamic = value;
+
+		var cValue:Dynamic = value;
+		if(!Std.is(fieldType, Array) && Std.is(value, Array)) cValue = value[0];
+
 
         try
         {
-            cValue = castValue(value, fieldType);
+            cValue = castValue(cValue, fieldType);
             //trace("castValue: "+ cValue);
             return cValue;
         }
         catch(e:Dynamic)
         {
             trace(e);
+
         }
 
         return cValue;
@@ -63,7 +68,15 @@ class ReflectingInstanceFactory extends InstanceFactory, implements IElementFact
 
             if(targetType == null)
             {
-                Reflect.setProperty(inst, attr, value);
+                try
+				{
+					Reflect.setProperty(inst, attr, value);
+				}
+				catch(e:Dynamic)
+				{
+					trace(e);
+					errors.push(new InstanceFactoryException(element, e));
+				}
                 continue;
             }
 
@@ -76,6 +89,7 @@ class ReflectingInstanceFactory extends InstanceFactory, implements IElementFact
             catch(e:Dynamic)
             {
                 trace(e);
+				errors.push(new InstanceFactoryException(element, e));
             }
         }
     }
@@ -128,19 +142,20 @@ class ReflectingInstanceFactory extends InstanceFactory, implements IElementFact
         return fieldType;
     }
 
-    function castValue(value:String, targetType:Class<Dynamic>):Dynamic
+    function castValue(value:Dynamic, targetType:Class<Dynamic>):Dynamic
     {
-        switch(targetType)
+        trace(targetType);
+		return switch(targetType)
         {
 
-            case Int: return Std.parseInt(value);
-            case Float: return Std.parseFloat(value);
-            default:
-                return parseString(value, targetType);
+            case Int: Std.parseInt(value);
+            case Float: Std.parseFloat(value);
+			//case String: parseString(value, targetType);
+            default: Std.is(value, String) ? parseString(value, targetType) : value;
         }
     }
 
-    function parseString(value:String, targetType:Class<Dynamic>):Dynamic
+    function parseString(value:Dynamic, targetType:Class<Dynamic>):Dynamic
     {
         if(StringTools.startsWith(value, "#"))
         {

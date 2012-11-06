@@ -1,0 +1,4 @@
+${prefix} function ${name}(${args})${returnType}
+{
+    ${body};
+}

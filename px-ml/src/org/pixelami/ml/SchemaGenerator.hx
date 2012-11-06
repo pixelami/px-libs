@@ -17,34 +17,22 @@ class SchemaGenerator
     public function generate(t:haxe.macro.Type)
     {
         //generateChildren(t.get());
-		_generate(t);
+		var type:Xml = _generate(t);
+		if(type != null) schema.addChild(type);
     }
 
     function _generate(t:haxe.macro.Type)
     {
-        switch(t)
+        return switch(t)
         {
             case haxe.macro.Type.TEnum(t, params): createEnumDefinition(t, params);
-            case haxe.macro.Type.TInst(t, params): createTypeDefinition(t, params);
-            case haxe.macro.Type.TType(t, params): createClassFactoryDefinition(t, params);
+            case haxe.macro.Type.TInst(t, params): createClassDefinition(t, params);
+            case haxe.macro.Type.TType(t, params): createTypeDefinition(t, params);
 
-            default:
+            default: null;
         }
 
     }
-/*
-
-    function generateChildren(t:haxe.macro.Type)
-    {
-        trace(t);
-
-        for(c in t.fields)
-        {
-            _generate(c);
-        }
-
-    }
-*/
 
     function createEnumDefinition(t:haxe.macro.Type.Ref<haxe.macro.Type.EnumType>, params : Array<haxe.macro.Type>)
     {
@@ -59,10 +47,11 @@ class SchemaGenerator
             enumeration.set("name", name);
             restriction.addChild(enumeration);
         }
-		schema.addChild(type);
+
+		return type;
     }
 
-    function createTypeDefinition(t:haxe.macro.Type.Ref<haxe.macro.Type.ClassType>, params : Array<haxe.macro.Type>)
+    function createClassDefinition(t:haxe.macro.Type.Ref<haxe.macro.Type.ClassType>, params : Array<haxe.macro.Type>)
     {
         var type:Xml = Xml.createElement("xs:complexType");
 		var cType:haxe.macro.Type.ClassType = t.get();
@@ -75,38 +64,31 @@ class SchemaGenerator
         {
             if(!isProperty(field)) continue;
 
-            //var e:Xml = Xml.createElement("xs:element");
-			//sequence.addChild(e);
-            //e.set("name", field.name);
-            //e.set("type", getXsType(field.type));
+            var e:Xml = Xml.createElement("xs:element");
+			sequence.addChild(e);
+            e.set("name", field.name);
+            e.set("type", getXsType(field.type));
 
 			var a:Xml = Xml.createElement("xs:attribute");
 			a.set("name", field.name);
 			a.set("type", getXsType(field.type));
 			type.addChild(a);
         }
-		schema.addChild(type);
+
+		return type;
     }
 
-    function createClassFactoryDefinition(t:haxe.macro.Type.Ref<haxe.macro.Type.DefType>, params : Array<haxe.macro.Type>)
+    function createTypeDefinition(t:haxe.macro.Type.Ref<haxe.macro.Type.DefType>, params : Array<haxe.macro.Type>)
     {
         var type:Xml = Xml.createElement("xs:complexType");
         type.set("name", t.get().name);
         var sequence = Xml.createElement("xs:sequence");
         type.addChild(sequence);
 		var d:haxe.macro.Type.DefType = t.get();
+		var schemaDef:Xml = createTypeDefinition(haxe.macro.Context.follow(d));
+		if(schemaDef == null) return;
 
-		/*
-        for(field in t.get().fields)
-        {
-            if(!isProperty(field)) continue;
-
-            var e:Xml = Xml.createElement("xs:element");
-			sequence.addChild(e);
-            e.set("name", field.name);
-            e.set("type", getXsType(field.type));
-        }
-        */
+		return type.addChild(schemaDef);
     }
 
     function createAttribute(f:haxe.macro.Type.ClassField, t:haxe.macro.Type)
@@ -120,11 +102,9 @@ class SchemaGenerator
 
     function isProperty(field:haxe.macro.Type.ClassField):Bool
     {
-        //if(field.isPublic) return true;
-
 		return switch(field.kind)
         {
-            case haxe.macro.Type.FieldKind.FVar(r,w): if(field.isPublic) return true;
+            case haxe.macro.Type.FieldKind.FVar(r,w): field.isPublic;
             default: false;
         }
     }

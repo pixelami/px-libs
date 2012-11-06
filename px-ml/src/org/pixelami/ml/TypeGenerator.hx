@@ -10,13 +10,15 @@ import org.pixelami.xml.ElementWalker;
 
 class TypeGenerator
 {
-    var visited:Hash<Bool>;
+    public static var entries:Array<{element:String, className:String}> = [];
+
+	var visited:Hash<Bool>;
     var typeInfos:Hash<MacroTypeInfo>;
     var manifests:Array<String>;
 
     public function new(manifests:Array<String>)
     {
-        this.manifests = manifests;
+		this.manifests = manifests;
         trace(manifests);
         visited = new Hash<Bool>();
 
@@ -46,6 +48,7 @@ class TypeGenerator
             registry.mapElementToClass(elementName, type);
         }
         registry.mapElementToClass("hx:Script", ScriptElement);
+		registry.mapElementToClass("hx:Declaration", DeclarationElement);
         //var factory:ReflectingElementFactory = new ReflectingElementFactory(registry);
         var factory:TypeElementFactory = new TypeElementFactory(registry, typeInfos);
         walker.factory = factory;
@@ -57,9 +60,9 @@ class TypeGenerator
             var generator:CodeGenerator = new CodeGenerator();
 
             var markup:String = neko.io.File.getContent(file);
-            trace("markup: "+markup);
-            var xml:Xml = Xml.parse(markup);
-            trace(xml.firstElement());
+            //trace("markup: "+markup);
+            var xml:Xml = pixelami.xml.Parser.parse(markup, file);  //Xml.parse(markup);
+            //trace(xml.firstElement());
             var elementTree = walker.walk(xml.firstElement());
             //trace(elementTree);
             generator.generate(elementTree);
@@ -81,11 +84,11 @@ class TypeGenerator
 
 
             var source:String = generator.toClassString();
-            trace(source);
-            neko.io.File.saveContent(moduleFile, source);
+            //trace(source);
+            sys.io.File.saveContent(moduleFile, source);
             pack.push(typeName);
             var ts = Context.getModule(pack.join("."));
-            trace(ts);
+            //trace(ts);
         }
     }
 
@@ -108,7 +111,7 @@ class TypeGenerator
     {
         var lastDotPos = file.lastIndexOf(".");
         var moduleFile =  file.substr(0, lastDotPos) + ".hx";
-        neko.io.File.saveContent(moduleFile, "");
+        sys.io.File.saveContent(moduleFile, "");
         return moduleFile;
     }
 
@@ -182,30 +185,43 @@ class TypeGenerator
         }
     }
 
+	public static function getManifestEntries(manifestPath:String):Array<{element:String, className:String}>
+	{
+		var manifest = null;
+		var entries:Array<{element:String, className:String}> = [];
+
+		try
+		{
+			manifest = neko.io.File.getContent(manifestPath);
+		}
+		catch(e:Dynamic)
+		{
+			trace(e);
+		}
+		if(manifest == null) return entries;
+
+		var manifestXML:Xml = Xml.parse(manifest);
+		var components = manifestXML.firstElement().elementsNamed("Component");
+
+		for(comp in components)
+		{
+			 entries.push({element: comp.get("name"), className: comp.get("class")});
+		}
+		return entries;
+	}
+
     public function processManifest(manifestPath:String)
     {
-        var manifest = null;
-        try
+        var entries:Array<{element:String, className:String}> = getManifestEntries(manifestPath);
+		TypeGenerator.entries = TypeGenerator.entries.concat(entries);
+        for(entry in entries)
         {
-            manifest = neko.io.File.getContent(manifestPath);
-        }
-        catch(e:Dynamic)
-        {
-            trace(e);
-        }
-        if(manifest == null) return;
-
-        var manifestXML:Xml = Xml.parse(manifest);
-        var components = manifestXML.firstElement().elementsNamed("Component");
-
-        for(comp in components)
-        {
-            //trace("comp: "+comp);
-            var typeName = comp.get("class");
-            var typeInfo:MacroTypeInfo = TypeMacroUtil.typeInfo(typeName);
+            //trace("entry: "+entry);
+            //var typeName = comp.get("class");
+            var typeInfo:MacroTypeInfo = TypeMacroUtil.typeInfo(entry.className);
             if(typeInfo  == null) continue;
-            typeInfo.elementName = comp.get("name");
-            trace(typeInfo.elementName);
+            typeInfo.elementName = entry.element;
+            //trace(typeInfo.elementName);
             typeInfos.set(typeInfo.typeName, typeInfo);
         }
 
@@ -217,6 +233,29 @@ class TypeGenerator
             //addMappings(localClass.get(), typeInfos);
         }
         */
+
+		/*
+		var t = haxe.macro.Context.getType("ml.MLRenderer");
+		switch(t)
+		{
+			case TInst(classType, params):
+			for(field in classType.get().fields.get())
+			{
+				var cf:haxe.macro.Type.ClassField = field;
+				if(cf.name == "register")
+				{
+					trace("BINGO )))))))))))))))))))))))))");
+					trace(cf.expr());
+					switch(cf.kind)
+					{
+						case
+					}
+				}
+
+			}
+			default:
+		}
+		*/
     }
 
 	function generateSchema()

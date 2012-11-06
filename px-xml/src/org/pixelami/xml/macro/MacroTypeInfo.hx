@@ -8,9 +8,12 @@ class MacroTypeInfo
     public var typeName:String;
     public var type:haxe.macro.Type;
     public var fields:Hash<ClassField>;
+	public var defaultPropertyField:String;
+	public var inheritanceChain:Array<String>;
 
     public function new()
     {
         fields = new Hash<ClassField>();
+		inheritanceChain = [];
     }
 }

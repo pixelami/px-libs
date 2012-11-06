@@ -1,12 +1,14 @@
 package org.pixelami.xml;
 
 
+import org.pixelami.xml.IInstanceFactory;
 typedef InstanceFactory = InstanceFactoryDefault ;
 
 
-class InstanceFactoryDefault implements IElementFactory
+class InstanceFactoryDefault implements IInstanceFactory
 {
     var registry:ElementRegistry;
+	var errors:Array<Dynamic>;
 
     public function new(registry:ElementRegistry)
     {
@@ -46,7 +48,12 @@ class InstanceFactoryDefault implements IElementFactory
         return elementInstance;
     }
 
-    public function castValueForField(inst:Dynamic, fieldName:String, value:String):Dynamic
+	public function setProperty(inst:Dynamic, fieldName:String, value:Dynamic)
+	{
+		Reflect.setProperty(inst, fieldName, value);
+	}
+
+    public function castValueForField(inst:Dynamic, fieldName:String, value:Dynamic):Dynamic
     {
         return value;
     }
@@ -80,6 +87,11 @@ class InstanceFactoryDefault implements IElementFactory
         }
 
     }
+
+	public function getErrors():Array<Dynamic>
+	{
+		return errors;
+	}
 
 }
 
