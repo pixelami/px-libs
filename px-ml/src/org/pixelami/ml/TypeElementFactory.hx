@@ -97,4 +97,9 @@ class TypeElementFactory implements IInstanceFactory
 	{
 		return errors;
 	}
+
+	public function clearErrors():Void
+	{
+		errors = [];
+	}
 }

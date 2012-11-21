@@ -23,10 +23,6 @@ class TypeElement implements ITypeDescriptor
 
 	var instanceNumber:Int;
 
-
-
-
-
     public function new()
     {
         instanceNumber = instanceCount ++;

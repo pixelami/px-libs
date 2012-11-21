@@ -1,13 +1,16 @@
 package org.pixelami.xml;
 
+import org.pixelami.xml.CastException;
 import org.pixelami.xml.InstanceFactory;
 import org.pixelami.xml.ElementRegistry;
 import org.pixelami.xml.XMLUtil;
 
 class ReflectingInstanceFactory extends InstanceFactory, implements IInstanceFactory
 {
-    var metaCache:Hash<Dynamic>;
+	static var numberPattern:EReg = ~/^0x[0-9ABCDEFabcdef]+$|^[0-9.]+$/;
+	var metaCache:Hash<Dynamic>;
     var meta:Dynamic;
+
 
     public function new(registry:ElementRegistry)
     {
@@ -30,7 +33,7 @@ class ReflectingInstanceFactory extends InstanceFactory, implements IInstanceFac
 		Reflect.setProperty(inst, fieldName, castValue );
 	}
 
-    override public function castValueForField(inst:Dynamic, fieldName:String, value:Dynamic):Dynamic
+    override function castValueForField(inst:Dynamic, fieldName:String, value:Dynamic):Dynamic
     {
         var type:Class<Dynamic> = Type.getClass(inst);
         buildMeta(type);
@@ -47,11 +50,16 @@ class ReflectingInstanceFactory extends InstanceFactory, implements IInstanceFac
             //trace("castValue: "+ cValue);
             return cValue;
         }
-        catch(e:Dynamic)
-        {
-            trace(e);
-
-        }
+		catch(e:CastException)
+		{
+			var msg = "Unable to cast '"+e.value+"' to "+Type.getClassName(e.castToType)+" for property '"+fieldName+"'";
+			//errors.push(new InstanceFactoryException(element,msg));
+		}
+		catch(e:Dynamic)
+		{
+			//trace(e);
+			//errors.push(new InstanceFactoryException(element, e));
+		}
 
         return cValue;
     }
@@ -63,24 +71,32 @@ class ReflectingInstanceFactory extends InstanceFactory, implements IInstanceFac
 		var tFields = Type.getInstanceFields(type);
         for(attr in attrbs)
         {
-            trace("assigning attr: "+attr);
+            // ignore any 'private' attributes
+			if(attr.substr(0,2) == "__") continue;
+			//trace("assigning attr: "+attr);
 			var targetType:Class<Dynamic> = getFieldType(inst, attr);
             var value:String = element.get(attr);
 
+			// currently the classfield test is the safest way to check for
+			// property assignment errors
 			var idx = Lambda.indexOf(tFields, attr);
-			if(idx > -1) trace("classField exists '"+attr+"'");
+			if(idx == -1)
+			{
+				var msg = "Property '"+attr+"' does not exist in "+Type.getClassName(type);
+				errors.push(new InstanceFactoryException(element, msg));
+			}
 
             if(targetType == null)
             {
-                trace("no target type for attr '"+attr+"'");
+                //trace("no target type for attr '"+attr+"'");
 				try
 				{
 					Reflect.setProperty(inst, attr, value);
 				}
 				catch(e:Dynamic)
 				{
-					trace("could not assign '"+attr+"'");
-					trace(e);
+					//trace("could not assign '"+attr+"'");
+					//trace(e);
 
 					errors.push(new InstanceFactoryException(element, e));
 				}
@@ -93,9 +109,14 @@ class ReflectingInstanceFactory extends InstanceFactory, implements IInstanceFac
                 //trace("castValue: "+ cValue);
                 Reflect.setProperty(inst, attr, cValue);
             }
+			catch(e:CastException)
+			{
+				var msg = "Unable to cast '"+e.value+"' to "+Type.getClassName(e.castToType)+" for property '"+attr+"'";
+				errors.push(new InstanceFactoryException(element,msg));
+			}
             catch(e:Dynamic)
             {
-                trace(e);
+                //trace(e);
 				errors.push(new InstanceFactoryException(element, e));
             }
         }
@@ -114,8 +135,8 @@ class ReflectingInstanceFactory extends InstanceFactory, implements IInstanceFac
         while (type != null)
         {
             var typeMeta = haxe.rtti.Meta.getFields(type);
-			trace("typemeta: ");
-			trace(typeMeta);
+			//trace("typemeta: ");
+			//trace(typeMeta);
             for (field in Reflect.fields(typeMeta))
             {
                 var m = Reflect.field(typeMeta, field);
@@ -130,7 +151,7 @@ class ReflectingInstanceFactory extends InstanceFactory, implements IInstanceFac
     function getFieldType(inst:Dynamic, fieldName:String):Class<Dynamic>
     {
         var fieldMeta = Reflect.field(meta,fieldName);
-        var fieldTypeMeta:Array<Dynamic> = Reflect.field(fieldMeta, "type");
+        var fieldTypeMeta:Array<Dynamic> = Reflect.field(fieldMeta, org.pixelami.xml.MetaConst.TYPE_META_NAME);
         var fieldTypeName = null;
 
         if(fieldTypeMeta == null) return null;
@@ -140,7 +161,7 @@ class ReflectingInstanceFactory extends InstanceFactory, implements IInstanceFac
 
         try
         {
-            fieldType =  Type.resolveClass(fieldTypeName);
+            fieldType = Type.resolveClass(fieldTypeName);
         }
         catch(e:Dynamic)
         {
@@ -152,13 +173,17 @@ class ReflectingInstanceFactory extends InstanceFactory, implements IInstanceFac
 
     function castValue(value:Dynamic, targetType:Class<Dynamic>):Dynamic
     {
-        trace(targetType);
+        //trace("targetType:" + targetType);
 		return switch(targetType)
         {
 
-            case Int: Std.parseInt(value);
-            case Float: Std.parseFloat(value);
-			//case String: parseString(value, targetType);
+			case Int:
+				if(!numberPattern.match(value)) throw new CastException(value,targetType,"not an Int");
+				Std.parseInt(value);
+			case Float:
+				if(!numberPattern.match(value)) throw new CastException(value,targetType,"not a Float");
+				Std.parseFloat(value);
+
             default: Std.is(value, String) ? parseString(value, targetType) : value;
         }
     }

@@ -10,4 +10,9 @@ class InstanceFactoryException
 		this.element = element;
 		this.error = error;
 	}
+
+	public function toString():String
+	{
+		return "[InstanceFactoryException " + error + "]";
+	}
 }

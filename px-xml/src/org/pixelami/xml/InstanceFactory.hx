@@ -19,7 +19,7 @@ class InstanceFactoryDefault implements IInstanceFactory
     {
         if(element.nodeType != Xml.Element)
         {
-            throw new ElementFactoryException(element.toString().substr(0,20),"supplied argument is not of type Xml.Element");
+            throw new ElementFactoryException(element,"supplied argument is not of type Xml.Element");
         }
         var classForElement:Class<Dynamic> = registry.getClassForElement(element.nodeName);
         //trace("element.nodeName: "+element.nodeName);
@@ -27,7 +27,7 @@ class InstanceFactoryDefault implements IInstanceFactory
         if(classForElement == null)
         {
             //classForElement = Dynamic;
-            throw new ElementFactoryException(element.nodeName);
+            throw new ElementFactoryException(element);
         }
 
         var elementInstance = null;
@@ -53,7 +53,7 @@ class InstanceFactoryDefault implements IInstanceFactory
 		Reflect.setProperty(inst, fieldName, value);
 	}
 
-    public function castValueForField(inst:Dynamic, fieldName:String, value:Dynamic):Dynamic
+    function castValueForField(inst:Dynamic, fieldName:String, value:Dynamic):Dynamic
     {
         return value;
     }
@@ -91,6 +91,11 @@ class InstanceFactoryDefault implements IInstanceFactory
 	public function getErrors():Array<Dynamic>
 	{
 		return errors;
+	}
+
+	public function clearErrors():Void
+	{
+		errors = [];
 	}
 
 }

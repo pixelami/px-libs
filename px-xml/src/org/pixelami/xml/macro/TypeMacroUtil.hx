@@ -6,6 +6,7 @@ import haxe.macro.Expr;
 
 class TypeMacroUtil
 {
+
     /**
      * @arg fully qualified className
      * @return TypeInfo object
@@ -85,10 +86,10 @@ class TypeMacroUtil
 
 					var fieldType:ClassType = fieldType.get();
 					//trace("fieldType:"+fieldType.name);
-					if(!fieldMetaAccess.has("type"))
+					if(!fieldMetaAccess.has(org.pixelami.xml.MetaConst.TYPE_META_NAME))
 					{
 						var fqcn = fieldType.pack.length > 1 ? fieldType.pack.join(".") + "." + fieldType.name : fieldType.name;
-						fieldMetaAccess.add("type", [{expr:EConst(CString(fqcn)),pos:classType.pos}], classType.pos);
+						fieldMetaAccess.add(org.pixelami.xml.MetaConst.TYPE_META_NAME, [{expr:EConst(CString(fqcn)),pos:classType.pos}], classType.pos);
 						//fieldMetaAccess.add("type", [{expr:fieldType.name, pos:classType.pos}], classType.pos);
 					}
 				/*
@@ -140,7 +141,7 @@ class TypeMacroUtil
                 switch(c)
                 {
                     case CString(s):
-                        typeInfo(s);
+						typeInfo(s);
                     default:
                 }
             default:

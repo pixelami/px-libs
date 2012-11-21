@@ -2,16 +2,15 @@ package org.pixelami.xml;
 
 class ElementFactoryException
 {
-    var elementName:String;
-	var element:Xml;
-    var message:String;
+	public var element:Xml;
+    public var message:String;
 
-    public function new(elementName:String, ?message:String = "")
+    public function new(element:Xml, ?message:String = "")
     {
-        this.elementName = elementName;
+        this.element = element;
         if(message == "")
         {
-            this.message = "Unable to create Element "+elementName+"";
+            this.message = "Unable to create '"+element.nodeName+"'";
         }
         else
         {

@@ -6,10 +6,12 @@ class ElementWalker
     public var instanceIndex:Hash<Dynamic>;
     public var namespaceIndex:Hash<Dynamic>;
     public var duplicateIdWarnings:Bool;
+	public var strict:Bool;
 
-    public function new()
+    public function new(?strict=true)
     {
-        instanceIndex = new Hash<Dynamic>();
+        this.strict = strict;
+		instanceIndex = new Hash<Dynamic>();
     }
 
     public function walk(el:Xml,parent:Dynamic=null):Dynamic
@@ -17,6 +19,9 @@ class ElementWalker
         var inst:Dynamic = null;
         var node:Xml = el;
 
+        if(node.nodeType != Xml.Element) node = node.firstElement();
+
+        /*
         if(node.nodeType == Xml.Document)
         {
             trace("pointing document to first element") ;
@@ -33,6 +38,7 @@ class ElementWalker
                 //if(e != "Invalid call") trace(e);
             }
         }
+        */
 
         if(node.nodeType == Xml.Element)
         {
@@ -53,8 +59,7 @@ class ElementWalker
             catch (e:Dynamic)
             {
                  #if debug
-
-                 trace(e);
+                 //trace(e);
                  #end
             }
         }
@@ -98,7 +103,7 @@ class ElementWalker
             }
             catch(e:Dynamic)
             {
-                trace(e);
+                //trace(e);
             }
 
 
@@ -123,11 +128,15 @@ class ElementWalker
             }
             else
             {
-                trace("Warning: " + parent + " has no field '" + parentProperty + "'" );
+                var msg =  parent + " has no field '" + parentProperty + "'";
+				//trace("Warning: " + msg);
+				if(strict)
+				{
 
-                //trace(node);
-                //trace(node.nodeType);
-                // keep walking
+                    var e:ElementFactoryException = new ElementFactoryException(node, msg);
+					throw e;
+				}
+                // keep walking - at this stage we are allowing very loose mapping
                 for(e in node.elements())
                 {
                     //trace(e);
@@ -167,7 +176,6 @@ class ElementWalker
 
 		var type:Class<Dynamic> = Type.getClass(inst);
 		var instanceFields:Array<String> = Type.getInstanceFields(type);
-		//trace("instanceFields: "+instanceFields);
 		for(i in 0...instanceFields.length)
 		{
 			if(instanceFields[i] == field)
